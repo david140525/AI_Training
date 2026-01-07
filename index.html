@@ -1,0 +1,3034 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI在教学中应用专题培训</title>
+    <style>
+        :root {
+            /* Logo Colors: #1c5770 (Navy), #d2151a (Red) */
+            --primary: #1c5770;
+            /* Navy Blue from Logo */
+            --primary-dark: #13516b;
+            /* Darker Navy */
+            --secondary: #d2151a;
+            /* Red from Logo */
+            --bg-body: #f8fafc;
+            /* Light Grey Background */
+            --bg-card: #ffffff;
+            /* White Card */
+            --text-primary: #1e293b;
+            /* Dark Slate Text */
+            --text-secondary: #64748b;
+            /* Grey Text */
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --nav-bg: #1c5770;
+            /* Navy Sidebar */
+            --nav-text: #e2e8f0;
+            /* Light Sidebar Text */
+
+            /* Gradients tailored to brand */
+            --gradient-1: linear-gradient(135deg, #1c5770 0%, #2c7a9c 100%);
+            --gradient-2: linear-gradient(135deg, #d2151a 0%, #ef4444 100%);
+            --gradient-3: linear-gradient(135deg, #1c5770 0%, #d2151a 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: var(--bg-body);
+            color: var(--text-primary);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Subtle animated background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background:
+                radial-gradient(circle at 10% 20%, rgba(28, 87, 112, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(210, 21, 26, 0.05) 0%, transparent 40%);
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: var(--nav-bg);
+            color: var(--nav-text);
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            overflow-y: auto;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .logo {
+            /* Logo container adjustment */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 15px;
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            /* Aspect ratio fix */
+            width: auto;
+            max-width: 80%;
+            height: auto;
+            max-height: 80px;
+            object-fit: contain;
+            border-radius: 4px;
+            /* Slight radius if needed */
+            background: white;
+            /* Ensure logo stands out on dark nav */
+            padding: 5px;
+        }
+
+        .logo-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            margin: 6px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            transform: translateX(5px);
+        }
+
+        .nav-item.active {
+            background: var(--secondary);
+            /* Active red */
+            color: white;
+            box-shadow: 0 4px 15px rgba(210, 21, 26, 0.4);
+        }
+
+        .nav-item .icon {
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+
+        /* Main content */
+        .main {
+            margin-left: 280px;
+            padding: 40px;
+            min-height: 100vh;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hero section */
+        .hero {
+            text-align: center;
+            padding: 80px 40px;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            /* Softer shadow */
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 4px solid var(--primary);
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            margin-bottom: 24px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            border-color: var(--primary);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            background: rgba(28, 87, 112, 0.1);
+            color: var(--primary);
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Grid layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 1200px) {
+
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .grid-2,
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .nav {
+                transform: translateX(-100%);
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .menu-btn {
+                display: flex;
+            }
+        }
+
+        /* Comparison tables */
+        .comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 20px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .comparison-table th {
+            background: var(--primary);
+            color: white;
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 16px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+            background: white;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table tr:hover td {
+            background: #f8fafc;
+        }
+
+        /* Tags and badges */
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 2px;
+        }
+
+        .tag-success {
+            background: #ecfdf5;
+            color: #059669;
+            border: 1px solid #a7f3d0;
+        }
+
+        .tag-warning {
+            background: #fffbeb;
+            color: #d97706;
+            border: 1px solid #fde68a;
+        }
+
+        .tag-danger {
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+
+        .tag-primary {
+            background: #f0f9ff;
+            color: #0284c7;
+            border: 1px solid #bae6fd;
+        }
+
+        /* Stars rating */
+        .stars {
+            color: #f59e0b;
+            font-size: 16px;
+            letter-spacing: 2px;
+        }
+
+        /* Code blocks */
+        .code-block {
+            background: #1e293b;
+            color: #f1f5f9;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 16px 0;
+            border-left: 4px solid var(--secondary);
+            font-family: 'Consolas', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+
+        .code-label {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        /* Collapsible sections */
+        .collapsible {
+            cursor: pointer;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+            margin: 12px 0;
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .collapsible:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+
+        .collapsible-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .collapsible.open .collapsible-content {
+            max-height: 2000px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 10px;
+        }
+
+        .collapsible .arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .collapsible.open .arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Tips and warnings */
+        .tip {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 16px 0;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .tip-success {
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+            color: #166534;
+        }
+
+        .tip-warning {
+            background: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            color: #92400e;
+        }
+
+        .tip-danger {
+            background: #fef2f2;
+            border-left: 4px solid #ef4444;
+            color: #991b1b;
+        }
+
+        .tip-info {
+            background: #f0f9ff;
+            border-left: 4px solid #1c5770;
+            color: #155e75;
+        }
+
+        .tip-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        /* Section headers */
+        .section-header {
+            margin-bottom: 32px;
+        }
+
+        .section-header h2 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 18px;
+        }
+
+        /* Feature list */
+        .feature-item {
+            display: flex;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+
+        /* Adjusted feature colors to match theme */
+        .feature-icon.blue {
+            background: rgba(28, 87, 112, 0.1);
+            color: var(--primary);
+        }
+
+        .feature-icon.pink {
+            background: rgba(210, 21, 26, 0.1);
+            color: var(--secondary);
+        }
+
+        .feature-icon.green {
+            background: #ecfdf5;
+            color: #059669;
+        }
+
+        .feature-icon.orange {
+            background: #fffbeb;
+            color: #d97706;
+        }
+
+        /* Progress indicator */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-1);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        /* Highlight box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(28, 87, 112, 0.05), rgba(210, 21, 26, 0.05));
+            border-radius: 16px;
+            padding: 24px;
+            margin: 20px 0;
+            border: 1px solid rgba(28, 87, 112, 0.2);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Chapter number */
+        .chapter-num {
+            font-size: 80px;
+            font-weight: 900;
+            color: #f1f5f9;
+            /* Subtle background text */
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            z-index: 0;
+        }
+
+        /* Versus comparison */
+        .vs-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .vs-box {
+            flex: 1;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .vs-box.bad {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+        }
+
+        .vs-box.good {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+        }
+
+        .vs-divider {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--text-secondary);
+        }
+
+        /* Tool card */
+        .tool-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 25px rgba(28, 87, 112, 0.1);
+        }
+
+        .tool-logo {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .tool-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .tool-desc {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        /* Step indicator */
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .steps::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 50px;
+            right: 50px;
+            height: 2px;
+            background: #e2e8f0;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-num {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 auto 12px;
+        }
+
+        .step-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Mobile menu button */
+        .menu-btn {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            width: 44px;
+            height: 44px;
+            background: var(--primary);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .nav.open {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-animation"></div>
+
+    <button class="menu-btn" onclick="toggleNav()">☰</button>
+
+    <nav class="nav" id="nav">
+        <div class="logo">
+            <!-- Logo image with updated styling -->
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANcAAAAsCAYAAAD2KC1vAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OTgzNjVBMUM4MDU5MTFFOUIxOTdEQzk3ODJERUZFQzMiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OTgzNjVBMUI4MDU5MTFFOUIxOTdEQzk3ODJERUZFQzMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6Q0UxOURCQzU3QkFFMTFFOThEQkJGMjQ0OUMwRkVFMDQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6Q0UxOURCQzY3QkFFMTFFOThEQkJGMjQ0OUMwRkVFMDQiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7pCefiAAAbgUlEQVR42uxdCXyU1bU/38xksq8ECCQQQBYBwRVcKpuiIlieKwqK2mcVqaJWW6xVsE9tq31a6lJbKa1UVERFW3fUFhABAWURWWWPQIAkJCGZJJPMzLtn8r/Myc1MMt8kef2V5vx+J7N92733LP9z7rk3ViAQoG7X/ZhiIWfAT8XuxIu9DucjXaor3vdZjkepndqpnajgtVnk4DcBotE+y3JHe6JDKaTH6Tpzb0bHN7rUeBaNKdx9do3D9UjAsjaon6+K4VnOVdyzfUja6UQiF/+J8/s/KUpIOlCRkDTfUev9PN1bsz7B79tjsdqB1LskpUADj7rjzw64469Mq6oYdcO36+mxdYtpdXZu4N3c3laXqorBFtGb6vBtil9XvEzxOsVFxn2zFQ9SPFTx5YrPUXyF4t3tQ9JOJ5RyVbtcnp9vXtnVS9Z9i3N63LcjNZOK4xP3eR2OQiKrVqlWqsvvz832VncYfuQ7Ov1oIY3dv4vOP1RAidVVtLB7f3WYJa/bT/EMvK9SvFfxUXzOVJyvONF4lpL24fiPpzjFteEiEMW+GGS77l+uXBVxbv8wpSjnf7eLbs7oQLuVchUkp3Yvi4vvXutwktPvp/TaGurmKac+5UepY3UllbviiZWwu9OpsGWArECgwYUtpWx1Ph+/Jjot6+RAlM8SJfVV/KK+leI1iu8Oc5zSepojjmNPen+MfTVNcQ/FRxQnKM5RXK74r4o3KR6guBuOrRFemO97ktE+HvSlzQx+quIsjcRxPb7vYAhbpC61IIhliksVH7LZzjGKh+D9+4o7Ks5VfEDxR20sj70Vz1dciXbMVTxbcS/Ff0N7+PsFip82zv2Z4vHolxTFVyv+1sa9uyr+B/p6leIbIxx3qeJZuA8/y07F4yIKtPJKgcMJSXQkJY2qnC7qU1ZMp5YcCiYsNPnVdSpdcXQsLp6OpmaR9lOmUgXNjMNBlTU1VFJeSTmZ6WQ5FMAMNKtelo2OqFB8nvgcKV6sNI6riXHQkxQ/Iz7PUzwZ7++GNx6OAdVtuUAcvwrPrMmjeGUzysWD+5zw6u8BPqcEh6NeCMIR/xYPpSAM/iLFd0Vp/adCSJmuhJKfhM+/Vvxzxffht2joywiGLxztBOpJwOezoVx7YSi1jJyD8dBCFY9n08Teb4/NMa5WfHIUcpKJZ9TUKWpvwZ6qJD6xSYzWlBawx/LUeKmo9BjNmjqRFq35hj7f9C1lpCS1xKJxx/4mFP5RhvE7w8x3jEcLoCPM68jjtiieHsX9zxTvf6/4TniSmVDs6xX/Ecw0TChXBYTBLkmDwR6sj+LbFG+EAllNKBfDqwsVvwbF+BEs8xVR3He/eP8SDMkRfJ4I5doDpYmGtttos1fxTfBM2mP/Cve8SPGnQgR/DW9FYbzY5RHgZbg+7o3rdTEUbSD6cjc+W5ApRxhDH24sAi79pFaAWoX4Mkd2FdAT02+le64eQ++sXEcer1dpQ4uUiy39VlzeD0EZZniozUbD/YAz5xsdoY+zYBGjoUHi/ScCMs3Ee4ZRfxLHXC3e/yDGNnuNzxNtPC9BQG9XPFIIXKaIfaOh9UYyqhyvC8FtQZwI6wzlSVb8AOD8h3h/O8b/fsBGPmYK+usAjN8HUd6rEwxiQHhLHXY8r7gQxmYMZNCDPjwGj+5H7uAznJcGhV2h+BaXhnb18M5qUa84VfxVsGsfjRw5lKZPHBeEgvuLSikhLq6lHc5C9VPDNU8Wn78RVszsvBvE59URjmuOzhVw4+94vwHJmkQBmwYDtt1oKGYvxEDsddbCEtq1WemKH0Fs58cAlwtL3kUMIMdkf4FBGimMTaJN5Uo1hM7fhvFWDyALhmSLFXeAUI9BfzqhNNyPPdHeO4C+XoIifAX43BWKFo2XHo73eYoL8H4NPKWOAxdhzNJgoMvwmoD7d8WxpQghiu0mEZomFVcVFZdSSnoavfmLu4JfFRwupnJPNbldrtYeiIFhBkZjb20laoTQRzovWrpUYHH2RLuQkNgLnK47913F3fH+T4irMgBb7xaDztf7Oobk0yahHNcbcPUhWFZNhRAGmUTxtbDfnW2oXJNhPDQ9LDy4H8a1FhC1AmilE34rgzI+LCAlK9qkZmBpAJ4v04Dh3WDEGOXsAN8Gr6kNzFmA+3NEjMawe18sGbqmTavfT1WFRfTqU9OpQ3pK/eiWlFFR+THqkJrS2gPxueLvQ2i5YUvgISQmf0Uxl55MEN/FMo92LgaO4JX+Iq63CsrVB1BiP5RrNqCKpOnwdF1hcafYeAaN9xcYUFkrFwvXLyNkwFqTvoFxmWEIaLWIy/R9ncKT7hSegJpIPklKQ5vseNpBwmhx3zyIGK4pekzxPfBOJYhv4yBL3N6LcdyvhBzswOthw2A/JlFLqyiXy+mgwJ79NHbcCJp4wbmhkdj9HdWVV1JcZnprDe4AdCAL1jZAAAcsyM1G5uYaYOGNGKCiJjJsTdEtRtZvCK7DHukpDB4L0rUCirwGhVsOAWOv8gLgQscog+3mKFviBkC4Y8YxNS28h8+AsIwQuCjgt8ILWohrJxpCdkDEtmVR3MuEnI8I2BstbYRsJAkkE23iaCk8VhagPxuNewU07CDOeRavuxBf6Yz0hEbKFbCsIMdCfNrRCtWe3CR6/u6GUwOrtu4KHmBR5EkZm8RW8yfi80IIdq5IPct44UH8fqqwohyk/zeEpDnKF8o1HxbuW1jVNVCgeYB5I+HZCFg8TTxTJwNWxaJcCcbnw4ZgHosmGxxDrCeTOcXov/XGcV8ayjUjFhtt3OdBI2mlFdkpFF9m6th4vg0YmRRFYlvCZcK4xom+1h7zNIyxpBeN7PF5QpmfQLIFyhVUMIpJBRzqxG0FhXTzE1dTfsesBr+t27GPnKlJraVYFMaSfUWh+Y3LEPNo+gzQkRAAb4WV4s6aJQL9pqgKbv87ce+RULg8KPCNGJSOIj3tMhSoshXazpCW51duhUB8T/yWiHR0DQSqDpm1lla93CRg0csiiTQJBkp7qcNGkoDnwK7Ds6yEp2tWlMT7Dogv+dxDQjDrkNjxo09nUcN5zGuNa/4zSgNCQiH1s2hP+iag/goY5CcMQ/YqEhkTYGynIrv5Xsssm/JKhz0eOr9fP7rs8oayukXBxK937qOs1OTWxPwmdFgYxr2HG6zdGPSeEbxAJDoMdsD7uNHBd+L3DOGJDrQ43do8RIvHc9QhEJdtT0eMEIDit0Z2bxH6eAGSQ32RILgQrBM3W8U5JYi5rsHnIVEq11wKTXPEAXJNhiErANwrF0mPGSKRJWH7NOGN1rWg7dpD3gMD2hkKeCc1rPJho34Jjk/D8RtbDBt4buygGr+Jt02y0g2xWrhsDdWUlFFCVno01RmxCkK2yAa5mlAup6F8dlLhLFinG5m2OgE9mf6BDmcrm9NGytUbllxj7x9SaG5tH2LOi9GPT4WJy2KhAgj8AiR2eE7oAmpYWbLLsPpp+K4Uxsdl05CZiauL4A003YuxTDRiSy4ymNmK/a2V6z20hb3RcGFUpwCtvGu04WVA05gC/ONey1tSRKl5+ZQ+7Y5GP7/zxQZypqdEq1jRYlJ/GGtuCny46/liuJem22Gx+4NHUH150Ciqn3fJB0S6l+xVI9gl0yB0NoQrD57mEyheuHbbpUQjKZBtGJVgUpgapugT8V2JyBx2jvH+HNeOBRzehO/ShWIxXP85kMjMVu5vLSMDoeSviN9ug8d6Nky20msGkbYDbE5T1PpqKPcu5SXjGiZlPv96G63ZuJ1ycrJbW8BMYyCfu6KZTFlKE8mBpqgGnXaMGqfzJd7fZgT/Afr/o2wI2quIhzh7N6eVrm2FiR1zxXdHqOF8YiI8+EGqnzy3AMebKyAeEMHr++CZOdZ5yfjtScDW/lBgUz68iJVaAo+1cN+IxJVOLLxrHDfZ9LxB5fIrL8RspwSqtrSEErM7U/bU2xr99vTbynjW1pLb5SS/v1VkbACgjjkp/Dw6vpJCldyazodnOQDraZa3LEKMcl8z9+ZBkxO+P8GzvIAspMb2XB0/PYJy+dtYuXSW669QrpsAEw+28n0qRP9JjxpvGC5WpL0i6cIp7i+aufYNQASR+oq94XIjkfM/yFImRTAKxYCVLel/nxjDsRHaMR9wMHz6M2AjFrccDvJ6PZQ76TZypqQ1+G1vYRG9t2IdZeV0tKtYTR3MCvI7dNYRI6vEHomXI2SGseZsaT5EPOQR0DEJGaDSKLN0TwklvAnKJK3KNQKyEO6VECbLGdcKgxwOJmrh+VjxnyEE46Jsn51xKUO/aQ9TGgYJ6HVUO8V3uVHch1PvD0URFrwg+p77+0cYD6uFsXw0wsoJE64U+V8p8jBo4WGWZTPN5av0UJzlpA5Tbmn023N/+5SquQwqMd7uIDbVCaXwNF+iMZrXwl1nNnHuhRj8neK8Lbjeqiif7VHxfIOQwND0jBAkLUSc0RtmQAYZq3SNQbGS4Lk5/uCU72AjiTAU8OseKNchwLKW0D4DXpcZ9y0SUNCEkfvEd/2jFG5/M0wwHmacE2jmnGhi2WRhfC3RJtOonRYm3Dg53IWPey5HtIkHBR9rK0oo/fyRlDjglAY/7T9SQm8vW0OZuZ3I5wuQzXlpu3VrDljqC43vpyJFq9OlnFnigt2z8RoLsVDNRnJDEguwXKs0E4rMyQVZIDxS8ePwcAxrlsaQzMgC1MvCgGcgntCG6ad4rQVMXk7hJ5bteKwZhpLwvceIzyubGDs50TymFaHpVrTfacMrNkUnidjRLWJLr6kjiPGuN87vgH7oZsb9wRM9TmdlWZw7yxXwR9XlfFTmpAkNI8e6Ovps/RbqmJFGB0qPUbL9GZ8qG8d2RlZskPE9F27qNVVjjd9XIi5bG+MgzDCUi4X4gjAejoDLs4zf7odFfDOGe7NV3UzRL6UwPaY2MnbhBLfhSuMaFyJ5Mg+ZunDWPQ8o41FkLhlKnk725p0cETxPZYywLxwlAWHMBZJ5VSgsIwC9v4uu6pHxOcfr2rtkwGCe2QgW1jrdO3enZJDb72sWePrKyighI4syJ17X0JzsORA8t8pbSy5HTBn+aNcqseXfEEax2Gs8YiQ09httXUUN13fZIYZATxvwJ1zN3O/gJXUMJLN2dlL15qQ4p4LPEBkxqwl2QPFHh4HXdrKEz0CxOdlwNQRsPJDBHKCEsdQ4De4XY5IPKGt3u4FcePubALuyAXvnGJ7yS2oZccb3B1A03efdkQw6Gcb6CgOOboT8yclkHpv3GikXBQIbt6R1oCpXXNPwkCGht4KShw0jZ0YozClUMdaAHrlUUllFG9ZupszUpFgUqzCKzuZU7OfUcN7EA49i7plYDk+1x/DUyzBosVQTs6XeJK7FFryLCK7nGTCRy3FuFXChD2BNNNvIycWSuqZP79exBa+ReLMRFx6AckRTCCvjwaHoX1bshVCQb+GpXAjkedHocHHOUmq4lqoWRuWAzb4+KJJJWwDbdgEaa2Jh/rQFiuXBNcmI2yXUZIP9lpHg0hX+v6HQCnlCEmkPjEk9LEyo9a7amZoxrSghiRJ8dUEliwQJg6v2xl7S4OtOmWnEOvnbBR9QUqcsCthPv3/VzO+JEI7eGOiD6OztFKo/izRA/ZGuPQ9WtAuEnpX5D2SvctwDizUez5Ih0sBdkFiYhzjlLeEpBkMo+kB4B1Pzy19egvAEYKl3IyEyiJqf/A/g3hVCuaKdy3xd9GdTgrsdkIr7dQRijv3w3K1BdcgM/gljfwn6zwnEsIgaL+9vCRUhrmbahle9L8pqKOESQMgaA+6/Be/WG16dK2W2WVxBkTPxvpMq3O4dLy9/l0Yc3EsFyWlhs4f+ikoKOAI0YNsmcufmNfhtypN/ptlKufL79iCfzzYM5nqt3zeT7PBR61ISEgVtPQfVTv++5IhVPo7vuOsO+HZWxicVLM7Jp0R/5A2J6qrKKGnw4EaKtWju/MDsv39K2fm55PfF9CyfNBfqtUHHedoVq52aIX9LNTM4gRxfU/Xqkk7daH9SGiXX1YaNt4KTLWeeHpLO9eupbtpU2jpbee7OOeSOc8VS87OH2rYmr53a6V/m9oLUoaZq7tdZObQ4pzt19RwLlkM19B3+IFRMGzeWAl4vVaz4nCpXLqfAXqUb8Ym8O02s6y3+2D4M7XRCK5fyOVuV29n4ZveTyet0UZyvIRLzV1dTnCOeUi8aTZbbTZ4vv6S6I0VUvX03eTdvI0daSqyVqn9uH4Z2OhHJFQKXFuV4yn+2KPek99/p3ocm7N5CW9Kzj++66/dUUsqoEVT5xUo68MBDVLVuI3krjgbTN+4zhwc9Wwz0OjX+Jw3t1E4nlucKJjb8/g/IH9jxbL+zqNwdT2ne6uMFvf6AlxIHD6SSl1+homWfkaW8W0KnXHIkJVOgNub97h9oH4J2+o9QLo6zulWW/XBN5+70dP8h1LOyrAHUcyQlkmU5gzU0ljuOKNCi5SS8XGSXzXN4NexUKCXP/nO507VRnMeFtFw9rZelcFaGq7AHtnH/smXiFasT/03l43vop15tfB+eaL/e5jlcsM0T2DxX2SNKlMbFBmPa4Pkvxzg7IioXxGFpWuWx158cMJSWdMmnvuXFVOdw1M9kZmaxC4sqccF7xvv8fqrjREjjCl6e4Lw7hkZMg1LyHnK8lucXGJjmiMtYeB5Nb6rCJVCPUeM1YG1hvDhh86rNNo74FykTlznJff7GoZ/a2gjx5O3LUR6rt4/mapXBUBieYD+rmfMSoIiPt8HzP49xjmtSuVh1smqrJ9dYriNTzx5DRYnJ1P1YKfnUoc7MTKorKq7fLaq6hnyl5RRQsRhvCCpL4B3qfVWNN7jEPz05kWrrGk1T/RfF9r+TdMVBLoXq6Mz6uUEQCtlQvaygGK8s7Fz/p7em5sqKLhgAnpUPt4S6J35LxLFuG8+9V/Q3n8uT4lw5IpcVcLXHzVRfz8dGwFyVeyE1XO7BlI9Xvl5X4aW5FIvLec6h8KuJRhn9xhPqXGkxD4hAewJdJ7kkjEcbbnznFG3jdg0Ic19+ru9T4/IvDtj32/BYXBnCRbR6n8ECarwN27nUuP6U6Rvcf3AT3np4hN94TC6ixkucCo6rT5Oei6XecnjzK0tHb8voRDcMG09On496ZmSRZ/duqtm1g1KGDKWEU/tT8vfOovhh51HA7Sb/4WI6XHaMyjxVVHi0LDjnNf6c0ygrNYmqvQ3+p8BDFNq43i7VCeUcDYHrJtw+V6Nzqcp0QM7BjWxHPXFR60IKLdO/FwrAdYeLYAkvFudNwfX4P6TsofrypjNsPLdfKNBenM8LPLkA9EUh8Pr99fDK2pDwSmje6Xc5NfxXRvy8X6FfdCnQi3hGXobOpWHbBazjvuK9Lbis6AkoDSsfL5tYjGN6CE97KfpJGwEuv/oU532EvtY1miehXby2jfcP3ARPoemnQCy8knutEW9Hu/aKSQsTGyIuGuYqeS60nSWO4b5dgX77G4W2N6+C3HCbuPj7TaEDbGB5K7alkIEvDCXi5+dyujdgpG8NM77UrHLVx1+Or/PKiq/6LKcXXTviCkpKiqOMN16nqsIj5K/0UO2hI+SrrCRPr57Ub+xoumbUUBo/ZBCd07sHjRjUj0ac0pd2HDhMWwsKKSXx+EJV7uxftsD9Vgs3/AkG+nbRlmXoBC7izaPQylYzOMzC73prtBR4Ot5wpDc+PysUgl0+V9T3gZK5KLZVxQ6cVwcL+CGFag55QG8RHkMXIs+DBb4I0HYahSr7fVDyuUK4OuCZ74AR6i3gsBPwaxqUkOHnNbC8uhiVhWuyUMY8CtVPPic8aG/A6oVCwFwQ4gugeLcLj8r7S8yBctUA2sdCL6JtpyDmqsF19ZL4u9DuoWjn92GgatH3PAZXQkmuEpD3BRi4gWgbe2y9fTiPz29gXPNhXGZTaAs7sqVcgfq46a3c8uJJH+f3p8vOuISO7jtA/Q4dpBqlNHVFpVT99Vaq++srtO/jxVSoYqtkpURpCgY6HBat3LIzuOOuWJE8G0mFlpBeHToCVpSFaIawaOzyfygEzRFBubzGq/79DQFPtEANFoJ1BFhfC7Zd0vd5H1b+YwE3uBxrDT5vFs/RH4LBQs9V6EUUWvmaDsv9AwotnNR9tEEgBL3H4T54j99SaIcoDT/1sYUUWlmtS3X0P3jQi/i4Sp2LgbdSaLGqrrj/O5RVb8ipIfZqwEa9BOdojDKQA+PqghK9C6O0QCQXCN7xORiU/egDFzw0e/Z/GH0zAQZiG46X1e8acnKFfpmI20bHpFxaEtQB8/PKi8ctzelVe/FlN9OqvB50asVRSg0o2UpPVx4tmaqUJ1u2aiO9smQ1vb92E61QilVTV0dZPLFcL06Pk71/PBCJnCKG0f/KRbvky2DBHxVY2wqTvSOKvKuB3BJbVz5/K4J7EskGO6lS834pQjmkkucZn/WxFizpRAjWCtEf3ggKLAVbK8kcGKOBFNr/UCtOFwN6y+fW/b4nTMynr+022qY9SYkwGGyoToUCZxr3ibbAR/9Hye7wJFcK+EwiA+3DPZ7FuFYbRjPN6K89hj7kUWhhpl6NPUDE9SSMkGVbuY57MKIP8suLTtme1mH1paMm0MOnD6cUfy31Lyuqr+RwuciRlkw5mWmUnZpM6UmJwX/dGggEKmERWms+K1V0RAC81rCE9wkr1lFkiqSwpRsdrPdyl1BPxykHYRh4degOCv2vLjuwsIchpF0jPN8+AVF0NnUmLO4jsMTscb4Tz58Z4V5S4DuKtuiYZK7RJ3p5zGQR1yUb/fUj4RVXwEteJeCz9IT6NV5cn2HmfArtmiWNZp6NzBzBs2yGctcI6Pu4SFxwbHQnfg8IqKvhs2zbFNG2lRhfPYXyT8S2f8D7J/G6zEgsWWbuPyos47Mc23tUlJ5d4k74xaOnj3z4o9xedMe2r+imLWspL1iL2EhPeY3Lj6nhHgwtpd8j0MyG4Fji+svhva5Ax34goMp2PIveFusjNGupgKxrKbTv3F1C2JyAgw+ggxkG3U/R7drrx7XKBXS6B0LB9BI8o94OehMGlDNWev+LWbCQk4D1nxHXC4cGbhfKtB/303DzQRimUYA4maJPqhDLjRfe8HUKLdQkQKrTcM04JIL0+d/h+w34/Cygpu5HjpGmwpBcZijTnRT9fvpLAIsnI4myAMkenbHbAc88HbD7V0A4cTBYu0TbCiErhPj9DIyXPna1GMez0N6hiPmeF890Fzx/gwx4cD1Xt+t+bAPf8IpJq29BctpMcljXX7NnM6XVeent3L7B5Srqgl8BenxIJwY5Idz5aJP+x3VDwkCydmqn+tz8a7Ps7xUfnEK2aHv3yrIbah2Op97I7z/V7asbm+up2KY+Pw0cfCIRY/e+8AjnwqI9T7HN07XTfxD9nwADAJ4M9zaDQVLpAAAAAElFTkSuQmCC"
+                alt="英领国际学校">
+            <span class="logo-text">AI教学应用<br>专题培训--By David 2025</span>
+        </div>
+
+        <div class="nav-item active" onclick="showSection(0)">
+            <span class="icon">🏠</span>
+            <span>培训首页</span>
+        </div>
+        <div class="nav-item" onclick="showSection(1)">
+            <span class="icon">🤖</span>
+            <span>第1章 什么是AI</span>
+        </div>
+        <div class="nav-item" onclick="showSection(2)">
+            <span class="icon">🔍</span>
+            <span>第2章 AI工具扫描</span>
+        </div>
+        <div class="nav-item" onclick="showSection(3)">
+            <span class="icon">✍️</span>
+            <span>第3章 提示词实战</span>
+        </div>
+        <div class="nav-item" onclick="showSection(4)">
+            <span class="icon">🧠</span>
+            <span>第4章 AI Agent</span>
+        </div>
+        <div class="nav-item" onclick="showSection(5)">
+            <span class="icon">🎨</span>
+            <span>第5章 教学创作</span>
+        </div>
+        <div class="nav-item" onclick="showSection(6)">
+            <span class="icon">📚</span>
+            <span>第6章 学科应用</span>
+        </div>
+        <div class="nav-item" onclick="showSection(7)">
+            <span class="icon">💡</span>
+            <span>第7章 技巧与问题</span>
+        </div>
+    </nav>
+
+    <main class="main">
+        <!-- Section 0: Home -->
+        <section class="section active" id="section-0">
+            <div class="hero">
+                <h1>🤖 AI在教学中应用专题培训</h1>
+                <p>从零开始，和您一起走进AI辅助教学的新世界。通俗易懂，重在实践，让每位教师都能轻松掌握AI工具。</p>
+            </div>
+
+            <div class="grid-4">
+                <div class="card" style="text-align: center;">
+                    <div style="font-size: 48px; margin-bottom: 16px;">📖</div>
+                    <div style="font-size: 36px; font-weight: 800; color: var(--primary);">7</div>
+                    <div style="color: var(--text-secondary);">核心章节</div>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <div style="font-size: 48px; margin-bottom: 16px;">🎯</div>
+                    <div style="font-size: 36px; font-weight: 800; color: var(--secondary);">30+</div>
+                    <div style="color: var(--text-secondary);">实战案例</div>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <div style="font-size: 48px; margin-bottom: 16px;">🛠️</div>
+                    <div style="font-size: 36px; font-weight: 800; color: var(--success);">15+</div>
+                    <div style="color: var(--text-secondary);">AI工具</div>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <div style="font-size: 48px; margin-bottom: 16px;">⏱️</div>
+                    <div style="font-size: 36px; font-weight: 800; color: var(--warning);">3h</div>
+                    <div style="color: var(--text-secondary);">完整培训</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🎬</div>
+                    <div>
+                        <div class="card-title">推荐视频：AI时代的教育变革</div>
+                        <div class="card-subtitle">思考AI是否能改变教育模式</div>
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <a href="https://www.toutiao.com/video/7589269886635999782/" target="_blank"
+                        style="text-decoration: none; color: inherit;">
+                        <div class="tool-card" style="height: 100%; transition: transform 0.3s; cursor: pointer;">
+                            <div
+                                style="height: 160px; background: #e2e8f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; position: relative; overflow: hidden; background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+                                <div style="font-size: 48px;">▶️</div>
+                            </div>
+                            <h4 style="margin-bottom: 8px;">AI如何重塑教育</h4>
+                            <p style="color: var(--text-secondary); font-size: 14px;">
+                                虽然AI技术日新月异，但教育的本质从未改变。</p>
+                        </div>
+                    </a>
+                    <a href="https://www.douyin.com/video/7588947925271629102" target="_blank"
+                        style="text-decoration: none; color: inherit;">
+                        <div class="tool-card" style="height: 100%; transition: transform 0.3s; cursor: pointer;">
+                            <div
+                                style="height: 160px; background: #e2e8f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; position: relative; overflow: hidden; background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);">
+                                <div style="font-size: 48px;">▶️</div>
+                            </div>
+                            <h4 style="margin-bottom: 8px;">未来教育的生存法则</h4>
+                            <p style="color: var(--text-secondary); font-size: 14px;">
+                                在AI时代下，传统教育的本质是否适应。</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">📋</div>
+                    <div>
+                        <div class="card-title">培训内容概览</div>
+                        <div class="card-subtitle">七大核心模块，从入门到精通</div>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="feature-item">
+                        <div class="feature-icon blue">01</div>
+                        <div>
+                            <strong>什么是AI</strong>
+                            <p style="color: var(--text-secondary); font-size: 14px;">用最通俗的语言解释AI、大语言模型、生成式AI</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon pink">02</div>
+                        <div>
+                            <strong>AI工具全景扫描</strong>
+                            <p style="color: var(--text-secondary); font-size: 14px;">国内外AI工具真实对比和评价</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon green">03</div>
+                        <div>
+                            <strong>提示词工程实战</strong>
+                            <p style="color: var(--text-secondary); font-size: 14px;">学会写Prompt，让AI真正听话</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon orange">04</div>
+                        <div>
+                            <strong>AI Agent智能体</strong>
+                            <p style="color: var(--text-secondary); font-size: 14px;">理解下一代AI：能自主完成任务的智能助手</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon blue">05</div>
+                        <div>
+                            <strong>AI辅助教学创作</strong>
+                            <p style="color: var(--text-secondary); font-size: 14px;">PPT、网页、视频、音频一键生成</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon pink">06</div>
+                        <div>
+                            <strong>学科应用实战</strong>
+                            <p style="color: var(--text-secondary); font-size: 14px;">数语英理化各学科的真实应用案例</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon green">07</div>
+                        <div>
+                            <strong>使用技巧与问题</strong>
+                            <p style="color: var(--text-secondary); font-size: 14px;">避坑指南、效率技巧、常见问题解决</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip tip-info">
+                <div class="tip-icon">💡</div>
+                <div>
+                    <strong>培训理念</strong>
+                    <p>本培训以"重应用、轻理论"为核心理念。每个知识点都配有实际案例。请记住AI是工具，教师是主导——我们的目标是让AI成为您教学的得力助手。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 1: What is AI -->
+        <section class="section" id="section-1">
+            <div class="section-header">
+                <h2>🤖 第一章：什么是AI</h2>
+                <p>用最通俗的语言，帮您理解AI的本质</p>
+            </div>
+
+            <div class="card" style="position: relative; overflow: visible;">
+                <span class="chapter-num">01</span>
+                <div class="card-header">
+                    <div class="card-icon">🧠</div>
+                    <div>
+                        <div class="card-title">AI是什么？一个生活化的比喻</div>
+                        <div class="card-subtitle">忘掉那些复杂的技术术语</div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h3 style="margin-bottom: 16px;">🎯 一句话理解AI</h3>
+                    <p style="font-size: 20px; line-height: 1.8;">
+                        <strong>AI就像一个"超级全能助手"</strong>——它读过全世界的书，看过无数的图片和视频，学会了人类的语言和知识。
+                        你问它问题，它能回答；你让它写文章，它能写；你让它画画，它也能画。
+                    </p>
+                </div>
+
+                <div class="grid-2" style="margin-top: 24px;">
+                    <div class="tip tip-success">
+                        <div class="tip-icon">✅</div>
+                        <div>
+                            <strong>AI能做什么</strong>
+                            <ul style="margin-top: 8px; color: var(--text-secondary);">
+                                <li>回答各种知识性问题</li>
+                                <li>写文章、教案、评语</li>
+                                <li>翻译、润色、总结文本</li>
+                                <li>生成图片、视频、音频</li>
+                                <li>帮助编程、制作PPT</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tip tip-danger">
+                        <div class="tip-icon">❌</div>
+                        <div>
+                            <strong>AI不能做什么</strong>
+                            <ul style="margin-top: 8px; color: var(--text-secondary);">
+                                <li>完全替代教师的育人工作</li>
+                                <li>保证100%正确（会"一本正经地胡说八道"）</li>
+                                <li>理解学生的情感需求</li>
+                                <li>做出价值判断和道德决策</li>
+                                <li>承担法律责任</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">📚</div>
+                    <div>
+                        <div class="card-title">大语言模型（LLM）是什么？</div>
+                        <div class="card-subtitle">ChatGPT、Gemini、Claude、DeepSeek背后的核心技术</div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h3 style="margin-bottom: 16px;">📖 图书馆里的超级学霸</h3>
+                    <p style="font-size: 18px; line-height: 1.8;">
+                        想象有一个学生，他<strong>读完了全世界所有的书、网页、论文</strong>——几千亿字的内容。
+                        他不仅记住了这些内容，还学会了<strong>语言的规律</strong>：什么词后面通常跟什么词，什么句式表达什么意思。
+                        <br><br>
+                        当你问他问题时，他会根据学到的知识，<strong>"预测"出最合适的回答</strong>——一个字一个字地生成，就像打字一样。
+                        <br><br>
+                        这就是大语言模型的工作原理：<strong>通过海量数据训练，学会语言规律，然后生成文本</strong>。
+                    </p>
+                </div>
+
+                <div class="tip tip-warning" style="margin-top: 20px;">
+                    <div class="tip-icon">⚠️</div>
+                    <div>
+                        <strong>重要提醒：AI会"幻觉"</strong>
+                        <p>因为AI是"预测下一个词"，而不是"查找事实"，所以它有时会编造不存在的信息，这叫做"AI幻觉"。特别是涉及具体数据、日期、人名时，一定要核实！</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🎨</div>
+                    <div>
+                        <div class="card-title">生成式AI（AIGC）是什么？</div>
+                        <div class="card-subtitle">从文字到图片、视频、音乐的创作能力</div>
+                    </div>
+                </div>
+
+                <p style="margin-bottom: 20px;">生成式AI（AI Generated Content）指的是<strong>能够创作内容的AI</strong>，包括：</p>
+
+                <div class="grid-4">
+                    <div class="tool-card" style="text-align: center;">
+                        <div class="tool-logo">✍️</div>
+                        <div class="tool-name">AI写作</div>
+                        <div class="tool-desc">文章、教案、评语、剧本</div>
+                    </div>
+                    <div class="tool-card" style="text-align: center;">
+                        <div class="tool-logo">🎨</div>
+                        <div class="tool-name">AI绘画</div>
+                        <div class="tool-desc">插图、海报、教学素材</div>
+                    </div>
+                    <div class="tool-card" style="text-align: center;">
+                        <div class="tool-logo">🎬</div>
+                        <div class="tool-name">AI视频</div>
+                        <div class="tool-desc">微课、动画、数字人</div>
+                    </div>
+                    <div class="tool-card" style="text-align: center;">
+                        <div class="tool-logo">🎵</div>
+                        <div class="tool-name">AI音频</div>
+                        <div class="tool-desc">配音、音乐、语音合成</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🎓</div>
+                    <div>
+                        <div class="card-title">教师为什么要了解AI？</div>
+                        <div class="card-subtitle">这不是选修课，是必修课</div>
+                    </div>
+                </div>
+
+                <div class="grid-3">
+                    <div style="text-align: center; padding: 24px;">
+                        <div style="font-size: 48px; margin-bottom: 16px;">⏰</div>
+                        <div style="font-size: 24px; font-weight: 700; color: var(--primary);">效率革命</div>
+                        <p style="color: var(--text-secondary); margin-top: 8px;">备课时间从2小时缩短到20分钟</p>
+                    </div>
+                    <div style="text-align: center; padding: 24px;">
+                        <div style="font-size: 48px; margin-bottom: 16px;">🎯</div>
+                        <div style="font-size: 24px; font-weight: 700; color: var(--secondary);">个性化教学</div>
+                        <p style="color: var(--text-secondary); margin-top: 8px;">为每个学生定制学习内容和反馈</p>
+                    </div>
+                    <div style="text-align: center; padding: 24px;">
+                        <div style="font-size: 48px; margin-bottom: 16px;">🚀</div>
+                        <div style="font-size: 24px; font-weight: 700; color: var(--success);">创新教学</div>
+                        <p style="color: var(--text-secondary); margin-top: 8px;">实现以前不敢想的教学创意</p>
+                    </div>
+                </div>
+
+                <div class="tip tip-info">
+                    <div class="tip-icon">📢</div>
+                    <div>
+                        <strong>核心观点</strong>
+                        <p>AI不会取代教师，但<strong>会用AI的教师可能会取代不会用AI的教师</strong>。就像计算机刚出现时一样，这是一个必须拥抱的变化。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">⚖️</div>
+                    <div>
+                        <div class="card-title">AI在教学中的正确定位</div>
+                        <div class="card-subtitle">工具而非替代者</div>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="text-align: center;">
+                    <p style="font-size: 28px; font-weight: 700;">
+                        🛠️ AI = <span style="color: var(--primary);">强大的工具</span>
+                        <br>
+                        👨‍🏫 教师 = <span style="color: var(--secondary);">不可替代的主导者</span>
+                    </p>
+                </div>
+
+                <div class="tip tip-danger" style="margin-top: 24px;">
+                    <div class="tip-icon">🚫</div>
+                    <div>
+                        <strong>教育部明确规定</strong>
+                        <ul style="margin-top: 8px;">
+                            <li>严禁学生在考试中使用AI</li>
+                            <li>严禁直接使用AI生成内容作为作业提交</li>
+                            <li>教师不得将AI批改作为最终评价</li>
+                            <li>AI生成内容必须经过人工审核</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: AI Tools -->
+        <section class="section" id="section-2">
+            <div class="section-header">
+                <h2>🔍 第二章：AI工具全景扫描</h2>
+                <p>国内外AI工具真实对比和评价</p>
+            </div>
+
+            <div class="tip tip-warning">
+                <div class="tip-icon">⚠️</div>
+                <div>
+                    <strong>真实声明</strong>
+                    <p>以下评价基于2025年底的个人实际使用体验，可能会有个人的主管感受。AI发展很快，评价可能会随时间变化。</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🇨🇳</div>
+                    <div>
+                        <div class="card-title">国内AI工具对比</div>
+                        <div class="card-subtitle">不用<strong>科学上网</strong>就能用的选择</div>
+                    </div>
+                </div>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 15%;">工具</th>
+                            <th style="width: 25%;">核心优势</th>
+                            <th style="width: 25%;">主要缺点</th>
+                            <th style="width: 15%;">适合场景</th>
+                            <th style="width: 20%;">真实评价</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a href="https://chat.deepseek.com/" target="_blank"
+                                    style="text-decoration: none; color: inherit;">
+                                    <strong style="color: #6366f1;">DeepSeek</strong>
+                                </a>
+                                <br><span class="tag tag-success">推荐</span>
+                            </td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 16px; color: var(--text-secondary);">
+                                    <li>推理能力强，接近GPT-5</li>
+                                    <li>完全免费，没有次数限制</li>
+                                    <li>开源，技术透明</li>
+                                    <li>具备一定的写代码能力</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 16px; color: var(--text-secondary);">
+                                    <li>长文本处理稍弱</li>
+                                    <li>有时响应较慢</li>
+                                    <li>创意写作不如Claude</li>
+                                    <li>但不是多模态AI</li>
+                                </ul>
+                            </td>
+                            <td>日常问答<br>代码编程<br>逻辑推理</td>
+                            <td>
+                                <div class="stars">★★★★★</div>
+                                <p style="font-size: 12px; color: var(--success); margin-top: 4px;">性价比之王，国产之光</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="https://kimi.moonshot.cn/" target="_blank"
+                                    style="text-decoration: none; color: inherit;">
+                                    <strong style="color: #ec4899;">KIMI</strong>
+                                </a>
+                                <br><span class="tag tag-primary">长文本</span>
+                            </td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 16px; color: var(--text-secondary);">
+                                    <li>超长上下文（200万字）</li>
+                                    <li>可以直接读取网页链接</li>
+                                    <li>文档处理能力强，我常用来它来写PPT</li>
+                                    <li>有AI Agent</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 16px; color: var(--text-secondary);">
+                                    <li>创意写作一般</li>
+                                    <li>有时会过于啰嗦</li>
+                                    <li>推理能力不如DeepSeek</li>
+                                </ul>
+                            </td>
+                            <td>长文档处理<br>论文阅读<br>资料整理</td>
+                            <td>
+                                <div class="stars">★★★★☆</div>
+                                <p style="font-size: 12px; color: var(--primary); margin-top: 4px;">长文档处理首选</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="https://tongyi.aliyun.com/" target="_blank"
+                                    style="text-decoration: none; color: inherit;">
+                                    <strong style="color: #f59e0b;">通义千问</strong>
+                                </a>
+                                <br><span class="tag tag-warning">阿里系</span>
+                            </td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 16px; color: var(--text-secondary);">
+                                    <li>阿里生态集成好</li>
+                                    <li>多模态能力</li>
+                                    <li>有专业版可选</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 16px; color: var(--text-secondary);">
+                                    <li>整体能力中规中矩</li>
+                                    <li>没有特别突出的优势</li>
+                                    <li>审核较严格</li>
+                                </ul>
+                            </td>
+                            <td>阿里产品用户<br>企业用户</td>
+                            <td>
+                                <div class="stars">★★★☆☆</div>
+                                <p style="font-size: 12px; color: var(--warning); margin-top: 4px;">中规中矩，可以一用</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="https://www.doubao.com/" target="_blank"
+                                    style="text-decoration: none; color: inherit;">
+                                    <strong style="color: #22c55e;">豆包</strong>
+                                </a>
+                                <br><span class="tag tag-success">入门</span>
+                            </td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 16px; color: var(--text-secondary);">
+                                    <li>完全免费</li>
+                                    <li>界面简洁易用</li>
+                                    <li>什么都会，但样样稀松</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 16px; color: var(--text-secondary);">
+                                    <li>复杂任务能力有限</li>
+                                    <li>专业性不足</li>
+                                    <li>创作能力一般</li>
+                                </ul>
+                            </td>
+                            <td>入门尝试<br>日常聊天<br>简单任务</td>
+                            <td>
+                                <div class="stars">★★★☆☆</div>
+                                <p style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">适合初学者体验</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="https://yiyan.baidu.com/" target="_blank"
+                                    style="text-decoration: none; color: inherit;">
+                                    <strong style="color: #ef4444;">文心一言</strong>
+                                </a>
+                                <br><span class="tag tag-danger">百度系</span>
+                            </td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 16px; color: var(--text-secondary);">
+                                    <li>中文理解能力好</li>
+                                    <li>有百度生态支持</li>
+                                    <li>多模态功能</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 16px; color: var(--text-secondary);">
+                                    <li>创意和自由度受限</li>
+                                    <li>审核过于保守</li>
+                                    <li>回答偏"官方"风格</li>
+                                </ul>
+                            </td>
+                            <td>中文内容创作<br>百度用户</td>
+                            <td>
+                                <div class="stars">★★★☆☆</div>
+                                <p style="font-size: 12px; color: var(--danger); margin-top: 4px;">审核太严，体验打折</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🌍</div>
+                    <div>
+                        <div class="card-title">国外AI工具对比</div>
+                        <div class="card-subtitle">需要<strong>科学上网</strong>，但确实更强</div>
+                    </div>
+                </div>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 15%;">工具</th>
+                            <th style="width: 25%;">核心优势</th>
+                            <th style="width: 25%;">主要缺点</th>
+                            <th style="width: 15%;">价格</th>
+                            <th style="width: 20%;">真实评价</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a href="https://chat.openai.com/" target="_blank"
+                                    style="text-decoration: none; color: inherit;">
+                                    <strong style="color: #22c55e;">ChatGPT</strong>
+                                </a>
+                                <br><span class="tag tag-success">全能王</span>
+                            </td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 16px; color: var(--text-secondary);">
+                                    <li>综合能力最强</li>
+                                    <li>生态最完善，插件丰富</li>
+                                    <li>GPT-5多模态强大</li>
+                                    <li>有GPTs商店</li>
+                                    <li>用户量最大，资源最多</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 16px; color: var(--text-secondary);">
+                                    <li>需要科学上网</li>
+                                    <li>GPT-5需付费</li>
+                                    <li>对免费的用户体验不好</li>
+                                </ul>
+                            </td>
+                            <td>
+                                免费版有限<br>
+                                Plus: $20/月<br>
+                                Pro: $200/月
+                            </td>
+                            <td>
+                                <div class="stars">★★★★★</div>
+                                <p style="font-size: 12px; color: var(--success); margin-top: 4px;">综合最强，行业标杆</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="https://claude.ai/" target="_blank"
+                                    style="text-decoration: none; color: inherit;">
+                                    <strong style="color: #8b5cf6;">Claude</strong>
+                                </a>
+                                <br><span class="tag tag-primary">写作王</span>
+                            </td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 16px; color: var(--text-secondary);">
+                                    <li>写作质量最高</li>
+                                    <li>代码能力极强</li>
+                                    <li>长文本支持好（20万tokens）</li>
+                                    <li>回答更有"人味"</li>
+                                    <li>安全性设计更好</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 16px; color: var(--text-secondary);">
+                                    <li>需要科学上网</li>
+                                    <li>免费版限制多</li>
+                                    <li>不支持实时联网</li>
+                                </ul>
+                            </td>
+                            <td>
+                                免费版有限<br>
+                                Pro: $20/月
+                            </td>
+                            <td>
+                                <div class="stars">★★★★★</div>
+                                <p style="font-size: 12px; color: #8b5cf6; margin-top: 4px;">写作/代码首选</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="https://gemini.google.com/" target="_blank"
+                                    style="text-decoration: none; color: inherit;">
+                                    <strong style="color: #4285f4;">Gemini</strong>
+                                </a>
+                                <br><span class="tag tag-primary">谷歌系</span>
+                            </td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 16px; color: var(--text-secondary);">
+                                    <li>多模态能力强</li>
+                                    <li>与谷歌服务集成</li>
+                                    <li>有免费版本</li>
+                                    <li>Gemini 3综合实力很强</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul style="margin: 0; padding-left: 16px; color: var(--text-secondary);">
+                                    <li>中文支持稍弱</li>
+                                    <li>国内不可用</li>
+                                    <li>创意写作一般</li>
+                                </ul>
+                            </td>
+                            <td>
+                                免费版可用<br>
+                                Advanced: $20/月
+                            </td>
+                            <td>
+                                <div class="stars">★★★★★</div>
+                                <p style="font-size: 12px; color: #4285f4; margin-top: 4px;">谷歌家族，多模态优势</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">💡</div>
+                    <div>
+                        <div class="card-title">真实建议</div>
+                        <div class="card-subtitle">说点大实话</div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h3 style="color: var(--danger); margin-bottom: 16px;">🔥 残酷的真相</h3>
+                    <ol style="line-height: 2.2; font-size: 16px;">
+                        <li><strong>能用国外AI优先用国外的</strong>——整体能力确实更强，这是客观事实</li>
+                        <li><strong>如果只能用国产，首选DeepSeek</strong>——免费且能力接近GPT-5，是目前国产最强</li>
+                        <li><strong>需要处理长文档用KIMI</strong>——200万字上下文是独特优势</li>
+                        <li><strong>豆包和文心适合轻度尝试</strong>——别指望它们完成复杂任务</li>
+                        <li><strong>通义千问适合阿里生态用户</strong>——单独使用没有特别优势</li>
+                    </ol>
+                </div>
+
+                <div class="grid-3" style="margin-top: 24px;">
+                    <div class="tool-card">
+                        <div style="text-align: center; color: var(--success); font-size: 24px; margin-bottom: 12px;">🏆
+                        </div>
+                        <h4 style="text-align: center; margin-bottom: 8px;">日常使用推荐</h4>
+                        <p style="text-align: center; font-size: 20px; font-weight: 700; color: var(--primary);">
+                            DeepSeek</p>
+                        <p style="text-align: center; color: var(--text-secondary); font-size: 14px;">免费 + 强大 = 最佳选择</p>
+                    </div>
+                    <div class="tool-card">
+                        <div style="text-align: center; color: var(--warning); font-size: 24px; margin-bottom: 12px;">📄
+                        </div>
+                        <h4 style="text-align: center; margin-bottom: 8px;">长文档处理推荐</h4>
+                        <p style="text-align: center; font-size: 20px; font-weight: 700; color: var(--primary);">KIMI
+                        </p>
+                        <p style="text-align: center; color: var(--text-secondary); font-size: 14px;">200万字上下文无敌</p>
+                    </div>
+                    <div class="tool-card">
+                        <div style="text-align: center; color: var(--secondary); font-size: 24px; margin-bottom: 12px;">
+                            ✍️</div>
+                        <h4 style="text-align: center; margin-bottom: 8px;">写作/代码推荐</h4>
+                        <p style="text-align: center; font-size: 20px; font-weight: 700; color: var(--primary);">Claude
+                        </p>
+                        <p style="text-align: center; color: var(--text-secondary); font-size: 14px;">如果能访问的话</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🎯</div>
+                    <div>
+                        <div class="card-title">不同场景的AI选择</div>
+                        <div class="card-subtitle">对症下药，选对工具</div>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="collapsible" onclick="toggleCollapsible(this)">
+                        <div class="collapsible-header">
+                            <span>📝 备课写教案</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>推荐：</strong>DeepSeek / ChatGPT / Claude</p>
+                            <p style="color: var(--text-secondary);">需要逻辑清晰、结构完整的输出，这三个都很强</p>
+                        </div>
+                    </div>
+                    <div class="collapsible" onclick="toggleCollapsible(this)">
+                        <div class="collapsible-header">
+                            <span>📖 读论文/长文档</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>推荐：</strong>KIMI</p>
+                            <p style="color: var(--text-secondary);">200万字上下文，直接丢整本书进去都行</p>
+                        </div>
+                    </div>
+                    <div class="collapsible" onclick="toggleCollapsible(this)">
+                        <div class="collapsible-header">
+                            <span>🎨 生成图片素材</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>推荐：</strong>Midjourney / Nano Banana / 通义万相</p>
+                            <p style="color: var(--text-secondary);">图片生成是专门领域，用专门工具</p>
+                        </div>
+                    </div>
+                    <div class="collapsible" onclick="toggleCollapsible(this)">
+                        <div class="collapsible-header">
+                            <span>💻 编程/做网页</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>推荐：</strong>Claude / DeepSeek / Gemini 3</p>
+                            <p style="color: var(--text-secondary);">Claude代码能力最强，DeepSeek免费且不错</p>
+                        </div>
+                    </div>
+                    <div class="collapsible" onclick="toggleCollapsible(this)">
+                        <div class="collapsible-header">
+                            <span>🎬 制作视频/配音</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>推荐：</strong>剪映AI / HeyGen / ElevenLabs</p>
+                            <p style="color: var(--text-secondary);">这是专门领域，下一章会详细讲</p>
+                        </div>
+                    </div>
+                    <div class="collapsible" onclick="toggleCollapsible(this)">
+                        <div class="collapsible-header">
+                            <span>📊 制作PPT</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p><strong>推荐：</strong>Gamma / KIMI / Canva AI</p>
+                            <p style="color: var(--text-secondary);">专门的AI PPT工具更高效</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Prompt Engineering -->
+        <section class="section" id="section-3">
+            <div class="section-header">
+                <h2>✍️ 第三章：提示词工程实战</h2>
+                <p>学会写Prompt，让AI真正听你的话</p>
+            </div>
+
+            <div class="card" style="position: relative;">
+                <span class="chapter-num">03</span>
+                <div class="card-header">
+                    <div class="card-icon">🎯</div>
+                    <div>
+                        <div class="card-title">提示词的核心公式</div>
+                        <div class="card-subtitle">掌握这个公式，你就掌握了AI的钥匙</div>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="text-align: center;">
+                    <p style="font-size: 28px; font-weight: 700; margin-bottom: 20px;">
+                        🔑 万能公式
+                    </p>
+                    <p style="font-size: 24px; color: var(--primary);">
+                        <strong>角色</strong> + <strong>指令</strong> + <strong>上下文</strong> + <strong>格式</strong>
+                    </p>
+                </div>
+
+                <div class="grid-4" style="margin-top: 24px;">
+                    <div class="tool-card">
+                        <div class="tool-logo" style="color: var(--primary);">👤</div>
+                        <div class="tool-name">角色 Role</div>
+                        <div class="tool-desc">告诉AI它应该扮演谁，决定知识背景和说话风格</div>
+                        <div class="code-block" style="font-size: 12px;">
+                            "你是一位有20年经验的高中数学教师"
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-logo" style="color: var(--secondary);">📋</div>
+                        <div class="tool-name">指令 Instruction</div>
+                        <div class="tool-desc">明确告诉AI要做什么，要具体、清晰</div>
+                        <div class="code-block" style="font-size: 12px;">
+                            "请设计一份单元测试卷"
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-logo" style="color: var(--success);">📖</div>
+                        <div class="tool-name">上下文 Context</div>
+                        <div class="tool-desc">提供背景信息，帮助AI理解需求</div>
+                        <div class="code-block" style="font-size: 12px;">
+                            "学生刚学完一元二次方程"
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-logo" style="color: var(--warning);">📐</div>
+                        <div class="tool-name">格式 Format</div>
+                        <div class="tool-desc">说明希望的输出格式</div>
+                        <div class="code-block" style="font-size: 12px;">
+                            "包含5道选择题、3道填空题"
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">⚡</div>
+                    <div>
+                        <div class="card-title">好提示词 vs 坏提示词</div>
+                        <div class="card-subtitle">一对比就懂了</div>
+                    </div>
+                </div>
+
+                <div class="vs-container">
+                    <div class="vs-box bad">
+                        <h4 style="color: var(--danger); margin-bottom: 12px;">❌ 坏提示词</h4>
+                        <div class="code-block">帮我写个教案</div>
+                        <p style="color: var(--text-secondary); font-size: 14px; margin-top: 12px;">
+                            问题：太模糊，AI不知道什么学科、什么年级、什么内容
+                        </p>
+                    </div>
+                    <div class="vs-divider">VS</div>
+                    <div class="vs-box good">
+                        <h4 style="color: var(--success); margin-bottom: 12px;">✅ 好提示词</h4>
+                        <div class="code-block">
+                            你是一位经验丰富的高中物理教师。请为高一学生设计一份《牛顿第一定律》的教案。学生已经学过速度和加速度的概念。教案需要包含：教学目标、重难点、教学过程（导入、新授、练习、小结）、板书设计。时长45分钟。
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🎓</div>
+                    <div>
+                        <div class="card-title">五大教学场景提示词模板</div>
+                        <div class="card-subtitle">直接复制使用</div>
+                    </div>
+                </div>
+
+                <div class="collapsible" onclick="toggleCollapsible(this)">
+                    <div class="collapsible-header">
+                        <span>📚 场景一：备课设计</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="code-block">
+                            <div class="code-label">提示词模板</div>
+                            你是一位经验丰富的[学科]教师，擅长设计引人入胜的课堂教学。
+
+                            请为[年级]学生设计一份关于[课题名称]的完整教案。
+
+                            背景信息：
+                            - 学生已经掌握了[前置知识]
+                            - 本节课是[单元名称]的第[X]课时
+                            - 课时长度：[X]分钟
+
+                            请按以下格式输出：
+                            1. 教学目标（知识目标、能力目标、情感目标）
+                            2. 教学重难点
+                            3. 教学过程
+                            - 导入（5分钟）：用生活实例引入
+                            - 新授（25分钟）：分步骤讲解
+                            - 练习（10分钟）：设计2-3道练习题
+                            - 小结（5分钟）：总结要点
+                            4. 板书设计
+                            5. 作业布置
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapsible" onclick="toggleCollapsible(this)">
+                    <div class="collapsible-header">
+                        <span>📝 场景二：试卷出题</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="code-block">
+                            <div class="code-label">提示词模板</div>
+                            你是一位资深的[学科]命题专家。
+
+                            请为[年级]学生设计一份[考试类型]试卷，考查范围是[章节/知识点]。
+
+                            要求：
+                            - 题型分布：选择题[X]道、填空题[X]道、解答题[X]道
+                            - 难度分布：基础题60%、中等题30%、提高题10%
+                            - 总分：[X]分，时长：[X]分钟
+                            - 每道题需标注考查知识点和难度等级
+                            - 附详细答案和评分标准
+
+                            注意：题目要原创，不要使用网上能直接搜到的原题。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapsible" onclick="toggleCollapsible(this)">
+                    <div class="collapsible-header">
+                        <span>✏️ 场景三：学生评语</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="code-block">
+                            <div class="code-label">提示词模板</div>
+                            你是一位善于发现学生优点、擅长鼓励式教育的班主任。
+
+                            请为以下学生撰写期末评语：
+
+                            学生信息：
+                            - 姓名：[学生姓名]
+                            - 主要优点：[如：数学成绩优秀、乐于助人]
+                            - 需要改进：[如：上课偶尔走神、作业完成不够及时]
+                            - 本学期进步：[具体进步表现]
+                            - 兴趣爱好：[如：喜欢篮球、绘画]
+
+                            要求：
+                            - 字数：150-200字
+                            - 语气温暖亲切，以鼓励为主
+                            - 具体指出优点，委婉提出建议
+                            - 体现对学生的了解和关心
+                            - 给出下学期的期望
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapsible" onclick="toggleCollapsible(this)">
+                    <div class="collapsible-header">
+                        <span>👨‍👩‍👧 场景四：家长沟通</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="code-block">
+                            <div class="code-label">提示词模板</div>
+                            你是一位沟通能力强、善于家校协作的教师。
+
+                            请帮我撰写一份给家长的沟通信息：
+
+                            情况说明：
+                            - 学生姓名：[姓名]
+                            - 沟通目的：[如：反馈近期学习情况/讨论某个问题/邀请参加活动]
+                            - 具体情况：[详细描述]
+                            - 期望家长配合的事项：[具体要求]
+
+                            要求：
+                            - 语气礼貌、专业
+                            - 先肯定学生的优点
+                            - 客观描述问题，不带情绪
+                            - 提出具体可行的建议
+                            - 表达愿意共同配合的态度
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapsible" onclick="toggleCollapsible(this)">
+                    <div class="collapsible-header">
+                        <span>📊 场景五：作业批改</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="code-block">
+                            <div class="code-label">提示词模板</div>
+                            你是一位耐心细致的[学科]教师。
+
+                            请对以下学生作答进行批改和点评：
+
+                            题目：[粘贴题目]
+
+                            学生答案：[粘贴学生答案]
+
+                            标准答案：[如有的话粘贴]
+
+                            请按以下格式反馈：
+                            1. 得分：X/X分
+                            2. 正确的地方：指出学生做对的部分
+                            3. 错误分析：详细分析错在哪里，为什么错
+                            4. 改进建议：具体的学习建议
+                            5. 鼓励语：一句简短的鼓励
+
+                            注意：语气要鼓励性质，不要打击学生信心。
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🚀</div>
+                    <div>
+                        <div class="card-title">进阶技巧</div>
+                        <div class="card-subtitle">让你的提示词更上一层楼</div>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="tip tip-info">
+                        <div class="tip-icon">1️⃣</div>
+                        <div>
+                            <strong>分步提问</strong>
+                            <p style="color: var(--text-secondary);">复杂任务拆成多个小问题，一步步引导AI。比如先让它列大纲，再逐章展开。</p>
+                        </div>
+                    </div>
+                    <div class="tip tip-success">
+                        <div class="tip-icon">2️⃣</div>
+                        <div>
+                            <strong>及时纠正</strong>
+                            <p style="color: var(--text-secondary);">发现AI回答不对，直接说"这个不对，应该是..."，AI会学习并修正。</p>
+                        </div>
+                    </div>
+                    <div class="tip tip-warning">
+                        <div class="tip-icon">3️⃣</div>
+                        <div>
+                            <strong>追问细节</strong>
+                            <p style="color: var(--text-secondary);">回答太宽泛时，追问"能具体举个例子吗？""第三点能详细说说吗？"</p>
+                        </div>
+                    </div>
+                    <div class="tip tip-danger">
+                        <div class="tip-icon">4️⃣</div>
+                        <div>
+                            <strong>交叉验证</strong>
+                            <p style="color: var(--text-secondary);">重要信息用多个AI验证。让DeepSeek和KIMI分别回答，对比答案。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 24px;">
+                    <h4 style="margin-bottom: 12px;">💎 金句记住</h4>
+                    <p style="font-size: 18px; text-align: center;">
+                        "你给AI的信息越具体，AI给你的回答越精准"
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: AI Agent -->
+        <section class="section" id="section-4">
+            <div class="section-header">
+                <h2>🧠 第四章：AI Agent智能体</h2>
+                <p>理解下一代AI：能自主完成任务的智能助手</p>
+            </div>
+
+            <div class="card" style="position: relative;">
+                <span class="chapter-num">04</span>
+                <div class="card-header">
+                    <div class="card-icon">🤖</div>
+                    <div>
+                        <div class="card-title">什么是AI Agent？</div>
+                        <div class="card-subtitle">从"你问我答"到"你说我做"</div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h3 style="margin-bottom: 16px;">🎯 一个通俗的比喻</h3>
+                    <p style="font-size: 18px; line-height: 2;">
+                        <strong>传统AI（如ChatGPT基础版）</strong>就像一个<span
+                            style="color: var(--warning);">"百科全书"</span>——你问什么它答什么，但它不会主动做事。
+                        <br><br>
+                        <strong>AI Agent</strong>则像一个<span
+                            style="color: var(--success);">"智能秘书"</span>——你告诉它目标，它会自己思考、规划、调用各种工具，最终帮你完成任务。
+                    </p>
+                </div>
+
+                <div class="vs-container" style="margin-top: 24px;">
+                    <div class="vs-box bad"
+                        style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3);">
+                        <h4 style="color: var(--warning); margin-bottom: 12px;">📖 传统AI</h4>
+                        <ul style="color: var(--text-secondary);">
+                            <li>你问一句，它答一句</li>
+                            <li>需要你一步步引导</li>
+                            <li>只能处理文字</li>
+                            <li>没有记忆</li>
+                        </ul>
+                    </div>
+                    <div class="vs-divider">→</div>
+                    <div class="vs-box good">
+                        <h4 style="color: var(--success); margin-bottom: 12px;">🤖 AI Agent</h4>
+                        <ul style="color: var(--text-secondary);">
+                            <li>你说目标，它自己完成</li>
+                            <li>能自主思考和规划</li>
+                            <li>能调用各种工具</li>
+                            <li>有记忆和学习能力</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">⚙️</div>
+                    <div>
+                        <div class="card-title">AI Agent的四大核心能力</div>
+                        <div class="card-subtitle">理解这些，就理解了Agent的本质</div>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="tool-card">
+                        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+                            <div
+                                style="width: 50px; height: 50px; border-radius: 12px; background: var(--gradient-1); display: flex; align-items: center; justify-content: center; font-size: 24px;">
+                                🧠</div>
+                            <div>
+                                <h4>自主思考</h4>
+                                <p style="color: var(--text-secondary); font-size: 14px;">Planning & Reasoning</p>
+                            </div>
+                        </div>
+                        <p style="color: var(--text-secondary);">能够分析任务、制定计划、分解步骤。比如你说"帮我准备明天的公开课"，它会自己想出需要做教案、PPT、练习题等。
+                        </p>
+                    </div>
+                    <div class="tool-card">
+                        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+                            <div
+                                style="width: 50px; height: 50px; border-radius: 12px; background: var(--gradient-2); display: flex; align-items: center; justify-content: center; font-size: 24px;">
+                                🔧</div>
+                            <div>
+                                <h4>调用工具</h4>
+                                <p style="color: var(--text-secondary); font-size: 14px;">Tool Use</p>
+                            </div>
+                        </div>
+                        <p style="color: var(--text-secondary);">能够使用搜索引擎、代码执行器、文件处理器等外部工具。不再只是"说"，而是真的去"做"。</p>
+                    </div>
+                    <div class="tool-card">
+                        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+                            <div
+                                style="width: 50px; height: 50px; border-radius: 12px; background: var(--gradient-3); display: flex; align-items: center; justify-content: center; font-size: 24px;">
+                                💾</div>
+                            <div>
+                                <h4>记忆能力</h4>
+                                <p style="color: var(--text-secondary); font-size: 14px;">Memory</p>
+                            </div>
+                        </div>
+                        <p style="color: var(--text-secondary);">能记住之前的对话和你的偏好。比如记住你教高二物理、喜欢用案例教学，下次就不用重复说了。</p>
+                    </div>
+                    <div class="tool-card">
+                        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+                            <div
+                                style="width: 50px; height: 50px; border-radius: 12px; background: linear-gradient(135deg, #f59e0b, #ef4444); display: flex; align-items: center; justify-content: center; font-size: 24px;">
+                                🔄</div>
+                            <div>
+                                <h4>自我反思</h4>
+                                <p style="color: var(--text-secondary); font-size: 14px;">Self-Reflection</p>
+                            </div>
+                        </div>
+                        <p style="color: var(--text-secondary);">能检查自己的工作，发现问题并改正。比如写完教案后自己审核一遍，发现目标不够具体就修改。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🎓</div>
+                    <div>
+                        <div class="card-title">AI Agent在教学中的应用</div>
+                        <div class="card-subtitle">这些已经可以实现了</div>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="tip tip-info">
+                        <div class="tip-icon">👨‍🏫</div>
+                        <div>
+                            <strong>备课助手Agent</strong>
+                            <p style="margin-top: 8px; color: var(--text-secondary);">
+                                你说"帮我准备下周的《光的折射》课程"，Agent会：
+                            </p>
+                            <ol style="color: var(--text-secondary); margin-top: 8px; font-size: 14px;">
+                                <li>搜索相关教学资源</li>
+                                <li>设计教案框架</li>
+                                <li>制作PPT</li>
+                                <li>准备实验演示方案</li>
+                                <li>设计课后练习</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="tip tip-success">
+                        <div class="tip-icon">📚</div>
+                        <div>
+                            <strong>个性化辅导Agent</strong>
+                            <p style="margin-top: 8px; color: var(--text-secondary);">
+                                为每个学生配备24小时AI学习伙伴：
+                            </p>
+                            <ul style="color: var(--text-secondary); margin-top: 8px; font-size: 14px;">
+                                <li>记住学生的学习进度和薄弱点</li>
+                                <li>根据情况调整讲解方式</li>
+                                <li>生成针对性练习题</li>
+                                <li>及时解答学生疑问</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tip tip-warning">
+                        <div class="tip-icon">✅</div>
+                        <div>
+                            <strong>作业批改Agent</strong>
+                            <p style="margin-top: 8px; color: var(--text-secondary);">
+                                智能批改助手：
+                            </p>
+                            <ul style="color: var(--text-secondary); margin-top: 8px; font-size: 14px;">
+                                <li>自动批改客观题</li>
+                                <li>对主观题提供评分建议</li>
+                                <li>生成个性化评语</li>
+                                <li>统计班级错误分布</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tip tip-danger">
+                        <div class="tip-icon">❓</div>
+                        <div>
+                            <strong>学科问答Agent</strong>
+                            <p style="margin-top: 8px; color: var(--text-secondary);">
+                                基于学校教材训练的专属问答机器人：
+                            </p>
+                            <ul style="color: var(--text-secondary); margin-top: 8px; font-size: 14px;">
+                                <li>只回答教材范围内的问题</li>
+                                <li>答案与教材保持一致</li>
+                                <li>学生随时可以提问</li>
+                                <li>减轻教师答疑负担</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🛠️</div>
+                    <div>
+                        <div class="card-title">现成可用的Agent平台</div>
+                        <div class="card-subtitle">不用编程也能创建自己的Agent</div>
+                    </div>
+                </div>
+
+                <div class="grid-3">
+                    <div class="tool-card" style="text-align: center;">
+                        <div class="tool-logo">🎭</div>
+                        <div class="tool-name">GPTs</div>
+                        <div class="tool-desc">OpenAI官方Agent商店，数百万个现成Agent可用</div>
+                        <span class="tag tag-warning">需科学上网</span>
+                    </div>
+                    <div class="tool-card" style="text-align: center;">
+                        <div class="tool-logo">🤖</div>
+                        <div class="tool-name">Coze/扣子</div>
+                        <div class="tool-desc">字节跳动出品，国内可用的Agent创建平台</div>
+                        <span class="tag tag-success">国内可用</span>
+                    </div>
+                    <div class="tool-card" style="text-align: center;">
+                        <div class="tool-logo">🧩</div>
+                        <div class="tool-name">豆包智能体</div>
+                        <div class="tool-desc">可以创建各种角色AI，如AI读书伙伴</div>
+                        <span class="tag tag-success">国内可用</span>
+                    </div>
+                </div>
+
+                <div class="tip tip-info" style="margin-top: 20px;">
+                    <div class="tip-icon">💡</div>
+                    <div>
+                        <strong>实用建议</strong>
+                        <p>作为教师，不需要自己创建Agent，先学会使用现成的Agent即可。在GPTs商店或扣子平台搜索"教育""教学""备课"等关键词，可以找到很多实用的教育Agent。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: AI Content Creation -->
+        <section class="section" id="section-5">
+            <div class="section-header">
+                <h2>🎨 第五章：AI辅助教学创作</h2>
+                <p>PPT、网页、视频、音频一键生成</p>
+            </div>
+
+            <div class="card" style="position: relative;">
+                <span class="chapter-num">05</span>
+                <div class="card-header">
+                    <div class="card-icon">📊</div>
+                    <div>
+                        <div class="card-title">AI制作PPT：从2小时到10分钟</div>
+                        <div class="card-subtitle">教学PPT再也不用一页页做了</div>
+                    </div>
+                </div>
+
+                <div class="grid-3" style="margin-bottom: 24px;">
+                    <div class="tool-card" style="text-align: center; border: 2px solid var(--success);">
+                        <div class="tool-logo">🌟</div>
+                        <div class="tool-name">Gamma</div>
+                        <span class="tag tag-success">强烈推荐</span>
+                        <div class="tool-desc" style="margin-top: 8px;">一句话生成精美PPT，设计感最强</div>
+                        <div style="margin-top: 12px; font-size: 14px; color: var(--text-secondary);">
+                            <strong>优点：</strong>设计精美、操作简单<br>
+                            <strong>注意：</strong>免费额度有限
+                        </div>
+                    </div>
+                    <div class="tool-card" style="text-align: center;">
+                        <div class="tool-logo">📝</div>
+                        <div class="tool-name">KIMI</div>
+                        <span class="tag tag-primary">个人推荐</span>
+                        <div class="tool-desc" style="margin-top: 8px;">足以应付日常要求</div>
+                        <div style="margin-top: 12px; font-size: 14px; color: var(--text-secondary);">
+                            <strong>优点：</strong>本地化好、模板多<br>
+                            <strong>价格：</strong>需会员，但有免费的额度
+                        </div>
+                    </div>
+                    <div class="tool-card" style="text-align: center;">
+                        <div class="tool-logo">🎨</div>
+                        <div class="tool-name">Canva AI</div>
+                        <span class="tag tag-warning">设计类</span>
+                        <div class="tool-desc" style="margin-top: 8px;">设计平台+AI，素材丰富</div>
+                        <div style="margin-top: 12px; font-size: 14px; color: var(--text-secondary);">
+                            <strong>优点：</strong>素材海量、设计自由<br>
+                            <strong>价格：</strong>基础免费
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h4 style="margin-bottom: 12px;">📋 Gamma使用步骤</h4>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-num">1</div>
+                            <div class="step-text">访问gamma.app</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-num">2</div>
+                            <div class="step-text">输入PPT主题</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-num">3</div>
+                            <div class="step-text">选择模板风格</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-num">4</div>
+                            <div class="step-text">AI自动生成</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-num">5</div>
+                            <div class="step-text">微调导出</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapsible" onclick="toggleCollapsible(this)" style="margin-top: 20px;">
+                    <div class="collapsible-header">
+                        <span>📝 PPT生成提示词模板</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="code-block">
+                            创建一个关于[课题名称]的教学PPT，目标学生是[年级]。
+
+                            内容要求：
+                            1. 标题页：课题名称和教师信息
+                            2. 学习目标：3-4个明确的学习目标
+                            3. 知识讲解：分3-4个部分讲解核心内容
+                            4. 案例分析：2个生活化案例
+                            5. 课堂练习：2-3道练习题
+                            6. 课堂小结：总结要点
+                            7. 作业布置
+
+                            风格要求：
+                            - 简洁专业，配色和谐
+                            - 每页文字不超过6行
+                            - 多用图表和示意图
+                            - 适合课堂投影
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🌐</div>
+                    <div>
+                        <div class="card-title">AI制作网页：零代码搭建课程网站</div>
+                        <div class="card-subtitle">不会编程也能做精美网页</div>
+                    </div>
+                </div>
+
+                <div class="grid-3" style="margin-bottom: 24px;">
+                    <div class="tool-card" style="text-align: center; border: 2px solid var(--success);">
+                        <div class="tool-logo">✨</div>
+                        <div class="tool-name">Framer AI</div>
+                        <span class="tag tag-success">强烈推荐</span>
+                        <div class="tool-desc" style="margin-top: 8px;">一句话生成完整网页，自动配色布局</div>
+                    </div>
+                    <div class="tool-card" style="text-align: center;">
+                        <div class="tool-logo">🎯</div>
+                        <div class="tool-name">Claude</div>
+                        <span class="tag tag-primary">代码利器</span>
+                        <div class="tool-desc" style="margin-top: 8px;">速度快，简单易用</div>
+                    </div>
+                    <div class="tool-card" style="text-align: center;">
+                        <div class="tool-logo">📱</div>
+                        <div class="tool-name">Gemini 3</div>
+                        <span class="tag tag-warning">目前最热</span>
+                        <div class="tool-desc" style="margin-top: 8px;">Google 生态</div>
+                    </div>
+                </div>
+
+                <div class="tip tip-info">
+                    <div class="tip-icon">💡</div>
+                    <div>
+                        <strong>教学网页的四大应用场景</strong>
+                        <div class="grid-2" style="margin-top: 12px;">
+                            <div>
+                                <p>📚 <strong>课程介绍页</strong>：展示课程目标、大纲、要求</p>
+                                <p>📖 <strong>学习资源库</strong>：汇集课件、视频、练习</p>
+                            </div>
+                            <div>
+                                <p>🏆 <strong>作品展示墙</strong>：展示学生优秀作品</p>
+                                <p>📝 <strong>在线测验</strong>：学生自测和反馈</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🎬</div>
+                    <div>
+                        <div class="card-title">AI生成视频：让课堂更生动</div>
+                        <div class="card-subtitle">微课制作、数字人讲解、动画演示</div>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div>
+                        <h4 style="margin-bottom: 16px; color: var(--primary);">🎥 AI视频生成工具</h4>
+                        <div class="feature-item">
+                            <div class="feature-icon green">1</div>
+                            <div>
+                                <strong>HeyGen</strong> <span class="tag tag-success">效果最好</span>
+                                <p style="color: var(--text-secondary); font-size: 14px;">数字人及其逼真，口型完美。</p>
+                                <p style="color: var(--danger); font-size: 12px;">缺点：价格较贵，且需要科学上网。</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon blue">2</div>
+                            <div>
+                                <strong>Sora</strong> <span class="tag tag-primary">期待</span>
+                                <p style="color: var(--text-secondary); font-size: 14px;">OpenAI的王炸产品，目前尚未完全公测。</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon orange">3</div>
+                            <div>
+                                <strong>剪映AI</strong> <span class="tag tag-warning">最实用</span>
+                                <p style="color: var(--text-secondary); font-size: 14px;">
+                                    一键成片、图文成片。虽然不如HeyGen逼真，但<strong>完全免费且国内可用</strong>，是教师首选。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 16px; color: var(--secondary);">🎵 AI音频生成工具</h4>
+                        <div class="feature-item">
+                            <div class="feature-icon pink">1</div>
+                            <div>
+                                <strong>ElevenLabs</strong> <span class="tag tag-success">推荐</span>
+                                <p style="color: var(--text-secondary); font-size: 14px;">目前全球最自然的AI语音。</p>
+                                <p style="color: var(--warning); font-size: 12px;">需付费使用。</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon blue">2</div>
+                            <div>
+                                <strong>Azure TTS</strong> <span class="tag tag-primary">微软</span>
+                                <p style="color: var(--text-secondary); font-size: 14px;">免费且强大的语音合成服务。</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon orange">3</div>
+                            <div>
+                                <strong>剪映朗读</strong> <span class="tag tag-warning">最方便</span>
+                                <p style="color: var(--text-secondary); font-size: 14px;">剪映自带的文本朗读功能，音色很多，足以应付微课配音。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 24px;">
+                    <h4 style="margin-bottom: 12px;">🎯 教学视频应用场景</h4>
+                    <div class="grid-3">
+                        <div style="text-align: center;">
+                            <div style="font-size: 36px;">📹</div>
+                            <strong>微课制作</strong>
+                            <p style="color: var(--text-secondary); font-size: 14px;">5-10分钟知识点讲解视频</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 36px;">📚</div>
+                            <strong>课文配音</strong>
+                            <p style="color: var(--text-secondary); font-size: 14px;">语文/英语课文朗读音频</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 36px;">🎨</div>
+                            <strong>动画演示</strong>
+                            <p style="color: var(--text-secondary); font-size: 14px;">抽象概念可视化演示</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🖼️</div>
+                    <div>
+                        <div class="card-title">AI绘画：教学素材不用愁</div>
+                        <div class="card-subtitle">插图、海报、教学配图一键生成</div>
+                    </div>
+                </div>
+
+                <div class="grid-3">
+                    <div class="tool-card" style="text-align: center;">
+                        <div class="tool-logo">🎨</div>
+                        <div class="tool-name">Midjourney</div>
+                        <span class="tag tag-success">画质天花板</span>
+                        <div class="tool-desc" style="margin-top: 8px;">目前公认最强的AI绘画工具，但需要在Discord使用，有一定的上手门槛。</div>
+                    </div>
+                    <div class="tool-card" style="text-align: center;">
+                        <div class="tool-logo">🖼️</div>
+                        <div class="tool-name">Bing Image Creator</div>
+                        <span class="tag tag-primary">推荐</span>
+                        <div class="tool-desc" style="margin-top: 8px;">基于DALL-E 3，完全免费，直接对话就能画，非常适合教师。</div>
+                    </div>
+                    <div class="tool-card" style="text-align: center;">
+                        <div class="tool-logo">🏮</div>
+                        <div class="tool-name">通义万相</div>
+                        <span class="tag tag-warning">国产免费</span>
+                        <div class="tool-desc" style="margin-top: 8px;">阿里出品，对中文理解最好，生成中国风素材有优势。</div>
+                    </div>
+                </div>
+
+                <div class="collapsible" onclick="toggleCollapsible(this)" style="margin-top: 20px;">
+                    <div class="collapsible-header">
+                        <span>🖌️ 教学插图生成提示词示例</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="code-block">
+                            <strong>场景：物理·光的折射</strong>
+                            一束光线从空气斜射入水中发生折射的科学示意图，清晰显示入射角和折射角，蓝色水面，金色光线，简洁教科书风格，白色背景
+
+                            <strong>场景：历史·丝绸之路</strong>
+                            古代丝绸之路的驼队商旅，沙漠背景，骆驼队伍，远处的古城，唐朝风格，手绘插画风格，适合教科书使用
+
+                            <strong>场景：生物·细胞结构</strong>
+                            动物细胞结构示意图，清晰标注细胞核、线粒体、内质网等结构，科学插画风格，柔和配色，教育用途
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Subject Applications -->
+        <section class="section" id="section-6">
+            <div class="section-header">
+                <h2>📚 第六章：学科应用实战案例</h2>
+                <p>各学科的真实AI应用场景</p>
+            </div>
+
+            <div class="card" style="position: relative;">
+                <span class="chapter-num">06</span>
+                <div class="card-header">
+                    <div class="card-icon">📐</div>
+                    <div>
+                        <div class="card-title">数学教学AI应用</div>
+                        <div class="card-subtitle">从抽象到直观，让数学看得见</div>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div>
+                        <h4 style="color: var(--primary); margin-bottom: 16px;">🎯 应用场景一：几何可视化</h4>
+                        <p style="color: var(--text-secondary); margin-bottom: 16px;">
+                            使用AI生成三维动画，直观展示抽象的几何概念。
+                        </p>
+                        <ul style="color: var(--text-secondary);">
+                            <li>立体几何：三视图、截面、旋转体</li>
+                            <li>函数图像：动态绘制过程</li>
+                            <li>轨迹问题：点的运动轨迹演示</li>
+                        </ul>
+
+                        <div class="collapsible" onclick="toggleCollapsible(this)" style="margin-top: 16px;">
+                            <div class="collapsible-header">
+                                <span>💡 提示词示例</span>
+                                <span class="arrow">▼</span>
+                            </div>
+                            <div class="collapsible-content">
+                                <div class="code-block" style="font-size: 12px;">
+                                    请帮我解释正方体被一个平面截取形成的截面可能有哪些形状。要求：
+                                    1. 列出所有可能的截面形状
+                                    2. 每种情况说明切割位置
+                                    3. 用文字描述学生可以如何想象这个过程
+                                    4. 给出帮助学生记忆的口诀
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--secondary); margin-bottom: 16px;">🎯 应用场景二：智能作业系统</h4>
+                        <p style="color: var(--text-secondary); margin-bottom: 16px;">
+                            放弃传统的"打勾打叉"，利用AI提供更深度的反馈。
+                        </p>
+
+                        <div class="highlight-box">
+                            <h5 style="margin-bottom: 12px;">🌟 核心价值</h5>
+                            <ul style="color: var(--text-secondary); line-height: 1.8;">
+                                <li><strong>个性化反馈：</strong> AI能针对每个学生的错误，给出具体的解释和复习建议，而不仅仅是一个分数。</li>
+                                <li><strong>效率提升：</strong> 自动批改基础题，让教师有更多时间关注学生的思维过程。</li>
+                                <li><strong>深度分析：</strong> 自动生成班级共性错误报告，帮助教师调整教学重点。</li>
+                            </ul>
+                            <div class="tip tip-success" style="margin-top: 12px; font-size: 14px;">
+                                "以前改作业要2小时，现在只要20分钟，但我给学生的反馈却更多了。"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">💼</div>
+                    <div>
+                        <div class="card-title">商业学科(Business)应用</div>
+                        <div class="card-subtitle">案例分析、市场模拟、商业计划</div>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="tip tip-success">
+                        <div class="tip-icon">📊</div>
+                        <div>
+                            <strong>市场趋势模拟</strong>
+                            <p style="margin-top: 8px; color: var(--text-secondary);">
+                                利用AI模拟真实的市场环境和消费者行为，让学生在虚拟环境中测试自己的商业决策。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="tip tip-info">
+                        <div class="tip-icon">📑</div>
+                        <div>
+                            <strong>商业案例深度分析</strong>
+                            <p style="margin-top: 8px; color: var(--text-secondary);">
+                                这里有一个强大的用途：把复杂的商业案例（如Tesla的财报）投喂给AI，让它扮演"咨询顾问"，与学生进行辩论和探讨。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapsible" onclick="toggleCollapsible(this)" style="margin-top: 20px;">
+                    <div class="collapsible-header">
+                        <span>📝 商业案例分析提示词</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="code-block">
+                            你是一位资深的商业战略顾问。
+                            请根据我提供的[公司名称]的背景资料，进行SWOT分析。
+
+                            要求：
+                            1. 分析要基于2025年的最新市场环境
+                            2. 重点关注AI技术对该行业的影响
+                            3. 针对"威胁(Threats)"部分，给出3条具体的战略应对建议
+                            4. 语言风格专业、犀利
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🔤</div>
+                    <div>
+                        <div class="card-title">英语教学AI应用</div>
+                        <div class="card-subtitle">口语练习、听力训练、写作指导</div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h4 style="margin-bottom: 16px;">🎯 AI数字人智能对话系统</h4>
+                    <p style="margin-bottom: 16px; color: var(--text-secondary);">
+                        基于大语言模型的人机对话智能体，提供一对一发音辅导与口语对话练习。
+                    </p>
+                    <div class="grid-4">
+                        <div style="text-align: center;">
+                            <div style="font-size: 32px;">🎤</div>
+                            <strong>即时发音反馈</strong>
+                            <p style="font-size: 12px; color: var(--text-secondary);">AI实时评估发音准确度</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 32px;">💬</div>
+                            <strong>场景对话练习</strong>
+                            <p style="font-size: 12px; color: var(--text-secondary);">模拟各种真实对话场景</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 32px;">📝</div>
+                            <strong>语法纠错</strong>
+                            <p style="font-size: 12px; color: var(--text-secondary);">自动识别语法错误</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 32px;">📚</div>
+                            <strong>词汇扩展</strong>
+                            <p style="font-size: 12px; color: var(--text-secondary);">根据水平推荐词汇</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-2" style="margin-top: 20px;">
+                    <div class="collapsible" onclick="toggleCollapsible(this)">
+                        <div class="collapsible-header">
+                            <span>🗣️ 口语练习提示词</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <div class="code-block" style="font-size: 12px;">
+                                You are an English speaking partner. Let's practice a conversation about [topic:
+                                ordering food in a restaurant].
+
+                                Rules:
+                                1. Speak naturally, use common expressions
+                                2. If I make grammar mistakes, point them out gently
+                                3. Suggest better expressions when appropriate
+                                4. Keep responses short (2-3 sentences)
+                                5. Ask follow-up questions to keep the conversation going
+
+                                Let's start. You are the waiter, I am the customer.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="collapsible" onclick="toggleCollapsible(this)">
+                        <div class="collapsible-header">
+                            <span>✏️ 英语写作指导提示词</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <div class="code-block" style="font-size: 12px;">
+                                You are an English writing tutor. Please review this essay:
+
+                                [粘贴学生英语作文]
+
+                                Provide feedback on:
+                                1. Grammar errors (list each error with correction)
+                                2. Vocabulary suggestions (better word choices)
+                                3. Sentence structure improvements
+                                4. Overall organization
+                                5. A score out of 100
+
+                                Use encouraging language. Write your feedback in both English and Chinese.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🔬</div>
+                    <div>
+                        <div class="card-title">理科教学AI应用</div>
+                        <div class="card-subtitle">物理、化学、生物的虚拟实验与可视化</div>
+                    </div>
+                </div>
+
+                <div class="grid-3">
+                    <div class="tool-card">
+                        <div style="text-align: center; margin-bottom: 16px;">
+                            <div style="font-size: 48px;">⚡</div>
+                            <h4>物理：虚拟实验室</h4>
+                        </div>
+                        <p style="color: var(--text-secondary); font-size: 14px;">
+                            AI虚拟实验室模拟高危或难以操作的实验：
+                        </p>
+                        <ul style="color: var(--text-secondary); font-size: 14px; margin-top: 8px;">
+                            <li>电路实验：安全模拟短路</li>
+                            <li>力学实验：理想条件演示</li>
+                            <li>光学实验：精确测量角度</li>
+                        </ul>
+                    </div>
+                    <div class="tool-card">
+                        <div style="text-align: center; margin-bottom: 16px;">
+                            <div style="font-size: 48px;">🧪</div>
+                            <h4>化学：分子可视化</h4>
+                        </div>
+                        <p style="color: var(--text-secondary); font-size: 14px;">
+                            AI生成3D分子模型，直观展示：
+                        </p>
+                        <ul style="color: var(--text-secondary); font-size: 14px; margin-top: 8px;">
+                            <li>分子结构：立体空间构型</li>
+                            <li>化学键：键角、键长</li>
+                            <li>反应过程：原子重组动画</li>
+                        </ul>
+                    </div>
+                    <div class="tool-card">
+                        <div style="text-align: center; margin-bottom: 16px;">
+                            <div style="font-size: 48px;">🧬</div>
+                            <h4>生物：生命过程模拟</h4>
+                        </div>
+                        <p style="color: var(--text-secondary); font-size: 14px;">
+                            AI动画演示微观生命过程：
+                        </p>
+                        <ul style="color: var(--text-secondary); font-size: 14px; margin-top: 8px;">
+                            <li>细胞分裂：有丝分裂动画</li>
+                            <li>DNA复制：碱基配对过程</li>
+                            <li>光合作用：能量转换流程</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tip tip-success" style="margin-top: 20px;">
+                    <div class="tip-icon">✨</div>
+                    <div>
+                        <strong>实际案例：金属钠遇水实验</strong>
+                        <p style="color: var(--text-secondary);">
+                            化学老师使用AI虚拟实验室演示金属钠遇水爆炸实验。学生可以安全地观察实验现象，还能暂停、回放、调整参数，比真实实验更有教学价值。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🧠</div>
+                    <div>
+                        <div class="card-title">其他学科创新应用</div>
+                        <div class="card-subtitle">心理学、经济学、计算机的AI实践</div>
+                    </div>
+                </div>
+
+                <div class="grid-3">
+                    <div class="tip tip-info">
+                        <div class="tip-icon">🧘</div>
+                        <div>
+                            <strong>心理学 (Psychology)</strong>
+                            <ul style="color: var(--text-secondary); font-size: 14px; margin-top: 8px;">
+                                <li><strong>角色扮演：</strong>让AI扮演患有特定心理障碍的"病人"，学生扮演咨询师进行模拟访谈。</li>
+                                <li><strong>案例生成：</strong>生成各种复杂的心理学案例供分析。</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tip tip-success">
+                        <div class="tip-icon">📈</div>
+                        <div>
+                            <strong>经济学 (Economics)</strong>
+                            <ul style="color: var(--text-secondary); font-size: 14px; margin-top: 8px;">
+                                <li><strong>宏观模拟：</strong>模拟"加息"或"通胀"对经济体系的影响。</li>
+                                <li><strong>数据分析：</strong>辅助分析复杂的经济数据和图表。</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tip tip-warning">
+                        <div class="tip-icon">💻</div>
+                        <div>
+                            <strong>计算机 (CS)</strong>
+                            <ul style="color: var(--text-secondary); font-size: 14px; margin-top: 8px;">
+                                <li><strong>代码助手：</strong>解释复杂代码，查找Bug，生成代码片段。</li>
+                                <li><strong>算法可视化：</strong>生成算法执行过程的动画或步骤解析。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Tips and Issues -->
+        <section class="section" id="section-7">
+            <div class="section-header">
+                <h2>💡 第七章：使用技巧与常见问题</h2>
+                <p>避坑指南、效率技巧、常见问题解决</p>
+            </div>
+
+            <div class="card" style="position: relative;">
+                <span class="chapter-num">07</span>
+                <div class="card-header">
+                    <div class="card-icon">⚠️</div>
+                    <div>
+                        <div class="card-title">教师使用AI的七大误区</div>
+                        <div class="card-subtitle">这些坑，千万别踩</div>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="collapsible" onclick="toggleCollapsible(this)">
+                        <div class="collapsible-header">
+                            <span>❌ 误区一：完全依赖AI评分</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p style="color: var(--danger);"><strong>表现：</strong>让AI给学生打分，直接作为最终成绩</p>
+                            <p style="color: var(--warning);"><strong>风险：</strong>AI评分可能有偏差，引发争议</p>
+                            <p style="color: var(--success);"><strong>✓ 正确做法：</strong>AI生成初步反馈，教师审核并个性化后再分享给学生</p>
+                        </div>
+                    </div>
+                    <div class="collapsible" onclick="toggleCollapsible(this)">
+                        <div class="collapsible-header">
+                            <span>❌ 误区二：布置"防AI"作业</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p style="color: var(--danger);"><strong>表现：</strong>出纯知识记忆题，想着AI做不了</p>
+                            <p style="color: var(--warning);"><strong>风险：</strong>AI能力在进步，你永远防不住</p>
+                            <p style="color: var(--success);"><strong>✓ 正确做法：</strong>设计"与AI共生"的评估，包含个人反思、过程阐述或本地化情境</p>
+                        </div>
+                    </div>
+                    <div class="collapsible" onclick="toggleCollapsible(this)">
+                        <div class="collapsible-header">
+                            <span>❌ 误区三：直接用AI生成内容</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p style="color: var(--danger);"><strong>表现：</strong>AI写的评语直接发给家长</p>
+                            <p style="color: var(--warning);"><strong>风险：</strong>风格不一致，可能被发现，显得不真诚</p>
+                            <p style="color: var(--success);"><strong>✓ 正确做法：</strong>提供自己的评语样本让AI学习模仿，然后修改润色</p>
+                        </div>
+                    </div>
+                    <div class="collapsible" onclick="toggleCollapsible(this)">
+                        <div class="collapsible-header">
+                            <span>❌ 误区四：过度依赖AI决策</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p style="color: var(--danger);"><strong>表现：</strong>让AI决定学生的分班、升留级</p>
+                            <p style="color: var(--warning);"><strong>风险：</strong>重大决策必须由人做，AI只能辅助</p>
+                            <p style="color: var(--success);"><strong>✓ 正确做法：</strong>复杂决策交由人工判断，AI仅用于数据收集和初步分析</p>
+                        </div>
+                    </div>
+                    <div class="collapsible" onclick="toggleCollapsible(this)">
+                        <div class="collapsible-header">
+                            <span>❌ 误区五：不告诉学生用了AI</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p style="color: var(--danger);"><strong>表现：</strong>用AI批改作业但不告诉学生</p>
+                            <p style="color: var(--warning);"><strong>风险：</strong>不透明，学生发现后失去信任</p>
+                            <p style="color: var(--success);"><strong>✓ 正确做法：</strong>告诉学生用了AI辅助，教他们如何理解和使用AI反馈</p>
+                        </div>
+                    </div>
+                    <div class="collapsible" onclick="toggleCollapsible(this)">
+                        <div class="collapsible-header">
+                            <span>❌ 误区六：变手段为目的</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p style="color: var(--danger);"><strong>表现：</strong>为了用AI而用AI，不管是否真的需要</p>
+                            <p style="color: var(--warning);"><strong>风险：</strong>浪费时间，效果可能更差</p>
+                            <p style="color: var(--success);"><strong>✓ 正确做法：</strong>从"我为AI"转向"AI为我"，让AI真正服务于教学目标</p>
+                        </div>
+                    </div>
+                    <div class="collapsible" onclick="toggleCollapsible(this)">
+                        <div class="collapsible-header">
+                            <span>❌ 误区七：把AI当"全能保姆"</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p style="color: var(--danger);"><strong>表现：</strong>什么都让AI做，自己不思考</p>
+                            <p style="color: var(--warning);"><strong>风险：</strong>专业能力退化，离开AI无法工作</p>
+                            <p style="color: var(--success);"><strong>✓ 正确做法：</strong>借助AI淬炼教师核心能力，而非完全依赖</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🚫</div>
+                    <div>
+                        <div class="card-title">教育部明确规定的红线</div>
+                        <div class="card-subtitle">这些绝对不能做</div>
+                    </div>
+                </div>
+
+                <div class="tip tip-danger">
+                    <div class="tip-icon">⛔</div>
+                    <div>
+                        <strong>严禁事项</strong>
+                        <ul style="margin-top: 12px; line-height: 2;">
+                            <li>❌ 学生在任何考试中使用AI</li>
+                            <li>❌ 学生直接提交AI生成的作业作为自己的作品</li>
+                            <li>❌ 教师将AI批改作为学生的最终评价</li>
+                            <li>❌ 未经审核直接使用AI生成的教学内容</li>
+                            <li>❌ 将学生个人信息输入到AI系统</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 20px;">
+                    <h4 style="margin-bottom: 12px;">🔐 数据安全与隐私保护</h4>
+                    <div class="grid-3">
+                        <div>
+                            <strong style="color: var(--success);">✅ 保护学生隐私</strong>
+                            <p style="font-size: 14px; color: var(--text-secondary);">不要输入学生真实姓名、成绩等个人信息</p>
+                        </div>
+                        <div>
+                            <strong style="color: var(--warning);">✅ 保护教学资料</strong>
+                            <p style="font-size: 14px; color: var(--text-secondary);">内部资料、试卷等谨慎上传</p>
+                        </div>
+                        <div>
+                            <strong style="color: var(--primary);">✅ 及时清理记录</strong>
+                            <p style="font-size: 14px; color: var(--text-secondary);">敏感对话结束后删除历史</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🔧</div>
+                    <div>
+                        <div class="card-title">常见问题解决方案</div>
+                        <div class="card-subtitle">遇到问题别慌，看这里</div>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="collapsible" onclick="toggleCollapsible(this)">
+                        <div class="collapsible-header">
+                            <span>🤔 AI回答不准确怎么办？</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p style="color: var(--warning); margin-bottom: 8px;"><strong>可能原因：</strong></p>
+                            <ul style="color: var(--text-secondary); font-size: 14px;">
+                                <li>问题描述不清楚</li>
+                                <li>涉及专业领域AI不擅长</li>
+                                <li>AI产生了"幻觉"</li>
+                            </ul>
+                            <p style="color: var(--success); margin-top: 12px;"><strong>解决方案：</strong></p>
+                            <ul style="color: var(--text-secondary); font-size: 14px;">
+                                <li>重新表述问题，提供更多上下文</li>
+                                <li>要求AI说明信息来源</li>
+                                <li>用多个AI交叉验证</li>
+                                <li>手动核实关键信息</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="collapsible" onclick="toggleCollapsible(this)">
+                        <div class="collapsible-header">
+                            <span>📝 提示词无效怎么处理？</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p style="color: var(--warning); margin-bottom: 8px;"><strong>可能原因：</strong></p>
+                            <ul style="color: var(--text-secondary); font-size: 14px;">
+                                <li>指令太模糊</li>
+                                <li>要求相互矛盾</li>
+                                <li>上下文不够</li>
+                            </ul>
+                            <p style="color: var(--success); margin-top: 12px;"><strong>解决方案：</strong></p>
+                            <ul style="color: var(--text-secondary); font-size: 14px;">
+                                <li>使用"角色+指令+上下文+格式"公式</li>
+                                <li>把复杂任务拆成小步骤</li>
+                                <li>给AI举例说明你想要什么</li>
+                                <li>让AI先列大纲确认方向再展开</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="collapsible" onclick="toggleCollapsible(this)">
+                        <div class="collapsible-header">
+                            <span>😕 生成内容不符需求？</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p style="color: var(--warning); margin-bottom: 8px;"><strong>可能原因：</strong></p>
+                            <ul style="color: var(--text-secondary); font-size: 14px;">
+                                <li>没有说明目标受众</li>
+                                <li>格式要求不明确</li>
+                                <li>没给示例参考</li>
+                            </ul>
+                            <p style="color: var(--success); margin-top: 12px;"><strong>解决方案：</strong></p>
+                            <ul style="color: var(--text-secondary); font-size: 14px;">
+                                <li>明确说明是给谁看的</li>
+                                <li>具体描述格式（几个部分、每部分多长）</li>
+                                <li>给一个你满意的例子让AI模仿</li>
+                                <li>迭代修改："第二部分太长了，缩短一半"</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="collapsible" onclick="toggleCollapsible(this)">
+                        <div class="collapsible-header">
+                            <span>🔌 遇到技术问题怎么办？</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p style="color: var(--warning); margin-bottom: 8px;"><strong>常见问题：</strong></p>
+                            <ul style="color: var(--text-secondary); font-size: 14px;">
+                                <li>网页打不开/响应慢</li>
+                                <li>输入限制/输出截断</li>
+                                <li>登录/付费问题</li>
+                            </ul>
+                            <p style="color: var(--success); margin-top: 12px;"><strong>解决方案：</strong></p>
+                            <ul style="color: var(--text-secondary); font-size: 14px;">
+                                <li>换个时间试，避开高峰期</li>
+                                <li>长内容分多次输入</li>
+                                <li>换个AI平台试试</li>
+                                <li>国外AI需要科学上网</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">⚡</div>
+                    <div>
+                        <div class="card-title">效率提升实用技巧</div>
+                        <div class="card-subtitle">让AI使用更高效</div>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="tip tip-info">
+                        <div class="tip-icon">💾</div>
+                        <div>
+                            <strong>对话历史管理</strong>
+                            <ul style="color: var(--text-secondary); font-size: 14px; margin-top: 8px;">
+                                <li>善用对话历史，延续之前的话题</li>
+                                <li>新任务开启新对话，避免上下文污染</li>
+                                <li>给重要对话命名，方便日后查找</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tip tip-success">
+                        <div class="tip-icon">⚙️</div>
+                        <div>
+                            <strong>自定义指令设置</strong>
+                            <ul style="color: var(--text-secondary); font-size: 14px; margin-top: 8px;">
+                                <li>设置"我是高一物理老师"</li>
+                                <li>定义输出风格偏好</li>
+                                <li>这样每次对话不用重复说明</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tip tip-warning">
+                        <div class="tip-icon">🔄</div>
+                        <div>
+                            <strong>多轮对话优化</strong>
+                            <ul style="color: var(--text-secondary); font-size: 14px; margin-top: 8px;">
+                                <li>第一轮让AI列大纲</li>
+                                <li>确认方向后再展开细节</li>
+                                <li>不满意直接说"重写这部分"</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tip tip-danger">
+                        <div class="tip-icon">📋</div>
+                        <div>
+                            <strong>保存优质提示词</strong>
+                            <ul style="color: var(--text-secondary); font-size: 14px; margin-top: 8px;">
+                                <li>好用的提示词存成模板</li>
+                                <li>按场景分类整理</li>
+                                <li>建立个人提示词库</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card"
+                style="background: linear-gradient(135deg, rgba(28, 87, 112, 0.1), rgba(210, 21, 26, 0.1)); border: 2px solid rgba(28, 87, 112, 0.3);">
+                <div style="text-align: center; padding: 40px 20px;">
+                    <div style="font-size: 64px; margin-bottom: 24px;">🎓</div>
+                    <h2
+                        style="font-size: 32px; margin-bottom: 16px; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                        让AI成为教学的好伙伴
+                    </h2>
+                    <p
+                        style="font-size: 20px; color: var(--text-secondary); margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                        AI不会取代教师，但会用AI的教师可能会取代不会用AI的教师。
+                        <br>让我们一起拥抱变化，用AI创造更好的教育！
+                    </p>
+
+                    <div class="grid-3" style="max-width: 600px; margin: 0 auto;">
+                        <div>
+                            <div style="font-size: 36px;">📚</div>
+                            <strong>持续学习</strong>
+                            <p style="color: var(--text-secondary); font-size: 14px;">AI发展很快，保持学习</p>
+                        </div>
+                        <div>
+                            <div style="font-size: 36px;">🤝</div>
+                            <strong>人机协作</strong>
+                            <p style="color: var(--text-secondary); font-size: 14px;">发挥各自优势</p>
+                        </div>
+                        <div>
+                            <div style="font-size: 36px;">🚀</div>
+                            <strong>赋能教学</strong>
+                            <p style="color: var(--text-secondary); font-size: 14px;">让教育更美好</p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(28, 87, 112, 0.1);">
+                        <p style="color: var(--text-secondary);">感谢聆听！🙏 <br><span
+    style="font-size: 14px; opacity: 0.8;">Created by David</span><br>
+    <span style="font-size: 14px; opacity: 0.8;">邮箱：david.chen.dl@ealingedu.com.cn，欢迎大家投稿和问题联系我</span>
+</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Navigation
+        function showSection(index) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            // Show target section
+            document.getElementById('section-' + index).classList.add('active');
+
+            // Update nav
+            document.querySelectorAll('.nav-item').forEach((item, i) => {
+                item.classList.toggle('active', i === index);
+            });
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+
+            // Close mobile nav
+            document.getElementById('nav').classList.remove('open');
+        }
+
+        // Collapsible sections
+        function toggleCollapsible(el) {
+            el.classList.toggle('open');
+        }
+
+        // Mobile nav toggle
+        function toggleNav() {
+            document.getElementById('nav').classList.toggle('open');
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function (e) {
+            const sections = document.querySelectorAll('.section');
+            let currentIndex = 0;
+            sections.forEach((s, i) => {
+                if (s.classList.contains('active')) currentIndex = i;
+            });
+
+            if (e.key === 'ArrowRight' && currentIndex < sections.length - 1) {
+                showSection(currentIndex + 1);
+            } else if (e.key === 'ArrowLeft' && currentIndex > 0) {
+                showSection(currentIndex - 1);
+            }
+        });
+    </script>
+</body>
+
+</html>
